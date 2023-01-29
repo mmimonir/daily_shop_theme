@@ -1641,7 +1641,7 @@ img {
 
 #aa-testimonial {
   background-attachment: fixed;
-  background-image: url("../img/testimonial-bg-1.jpg");
+  /* background-image: url("../img/testimonial-bg-1.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
   display: inline;
@@ -1664,7 +1664,7 @@ img {
 #aa-testimonial .aa-testimonial-area {
   display: inline;
   float: left;
-  padding: 100px 0;
+  padding: 60px 0;
   text-align: center;
   width: 100%;
   position: relative;
