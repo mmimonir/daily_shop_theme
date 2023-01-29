@@ -12,11 +12,10 @@
  */
 
 function defineSequence(imagesLoaded, Hammer) {
-
-  'use strict';
+  "use strict";
 
   var instances = [],
-      instance = 0;
+    instance = 0;
 
   /**
    * Sequence function
@@ -25,8 +24,7 @@ function defineSequence(imagesLoaded, Hammer) {
    * @param {Object} options - this instance's options
    * @returns {Object} self - Properties and methods available to this instance
    */
-  var Sequence = (function (element, options) {
-
+  var Sequence = function (element, options) {
     var instanceId = element.getAttribute("data-seq-enabled");
 
     // Prevent multiple instances on the same element. Return the object instead
@@ -42,7 +40,6 @@ function defineSequence(imagesLoaded, Hammer) {
 
     // Default Sequence settings
     var defaults = {
-
       /* --- General --- */
 
       // The first step to show
@@ -64,7 +61,6 @@ function defineSequence(imagesLoaded, Hammer) {
       // Should the active step be given a higher z-index?
       moveActiveStepToTop: true,
 
-
       /* --- Canvas Animation --- */
 
       // Should the canvas automatically animate between steps?
@@ -72,7 +68,6 @@ function defineSequence(imagesLoaded, Hammer) {
 
       // Time it should take to animate between steps
       animateCanvasDuration: 250,
-
 
       /* --- autoPlay --- */
 
@@ -99,7 +94,6 @@ function defineSequence(imagesLoaded, Hammer) {
       // Pause autoPlay when the Sequence element is hovered over
       autoPlayPauseOnHover: true,
 
-
       /* --- Navigation Skipping --- */
 
       // Allow the user to navigate between steps even if they haven't
@@ -123,7 +117,6 @@ function defineSequence(imagesLoaded, Hammer) {
       // still active
       preventReverseSkipping: false,
 
-
       /* --- Next/Prev Button --- */
 
       // Use next and previous buttons? You can also specify a CSS selector to
@@ -132,14 +125,12 @@ function defineSequence(imagesLoaded, Hammer) {
       nextButton: true,
       prevButton: true,
 
-
       /* --- Pagination --- */
 
       // Use pagination? You can also specify a CSS selector to
       // change what element acts as pagination. If true, the element uses the
       // class of "seq-pagination"
       pagination: true,
-
 
       /* --- Preloader --- */
 
@@ -167,7 +158,6 @@ function defineSequence(imagesLoaded, Hammer) {
       // test it's styles
       pausePreloader: false,
 
-
       /* --- Keyboard --- */
 
       // Can the user navigate between steps by pressing keyboard buttons?
@@ -179,10 +169,13 @@ function defineSequence(imagesLoaded, Hammer) {
 
       // Events to run when the user presses the left/right keys
       keyEvents: {
-        left: function(sequence) {sequence.prev();},
-        right: function(sequence) {sequence.next();}
+        left: function (sequence) {
+          sequence.prev();
+        },
+        right: function (sequence) {
+          sequence.next();
+        },
       },
-
 
       /* --- Touch Swipe --- */
 
@@ -191,15 +184,18 @@ function defineSequence(imagesLoaded, Hammer) {
 
       // Events to run when the user swipes in a particular direction
       swipeEvents: {
-        left: function(sequence) {sequence.next();},
-        right: function(sequence) {sequence.prev();},
+        left: function (sequence) {
+          sequence.next();
+        },
+        right: function (sequence) {
+          sequence.prev();
+        },
         up: undefined,
-        down: undefined
+        down: undefined,
       },
 
       // Options to supply the third-party Hammer library See: http://hammerjs.github.io/recognizer-swipe/
       swipeHammerOptions: {},
-
 
       /* --- hashTags --- */
 
@@ -213,15 +209,13 @@ function defineSequence(imagesLoaded, Hammer) {
       // Should the hash change on the first step?
       hashChangesOnFirstStep: false,
 
-
       /* --- Fallback Theme --- */
 
       // Settings to use when the browser doesn't support CSS transitions
       fallback: {
-
         // The speed to transition between steps
-        speed: 500
-      }
+        speed: 500,
+      },
     };
 
     // Default value for autoPlay in milliseconds
@@ -236,11 +230,10 @@ function defineSequence(imagesLoaded, Hammer) {
 
     // Convert browser fixes to CSS strings
     var prefixTranslations = {
-
       animation: {
-        "WebkitAnimation": "-webkit-",
-        "animation": ""
-      }
+        WebkitAnimation: "-webkit-",
+        animation: "",
+      },
     };
 
     /**
@@ -253,14 +246,197 @@ function defineSequence(imagesLoaded, Hammer) {
      */
 
     /* jshint ignore:start */
-    var Modernizr=function(a,b,c){function z(a){i.cssText=a}function A(a,b){return z(l.join(a+";")+(b||""))}function B(a,b){return typeof a===b}function C(a,b){return!!~(""+a).indexOf(b)}function D(a,b){for(var d in a){var e=a[d];if(!C(e,"-")&&i[e]!==c)return b=="pfx"?e:!0}return!1}function E(a,b,d){for(var e in a){var f=b[a[e]];if(f!==c)return d===!1?a[e]:B(f,"function")?f.bind(d||b):f}return!1}function F(a,b,c){var d=a.charAt(0).toUpperCase()+a.slice(1),e=(a+" "+n.join(d+" ")+d).split(" ");return B(b,"string")||B(b,"undefined")?D(e,b):(e=(a+" "+o.join(d+" ")+d).split(" "),E(e,b,c))}var d="2.8.3",e={},f=b.documentElement,g="modernizr",h=b.createElement(g),i=h.style,j,k={}.toString,l=" -webkit- -moz- -o- -ms- ".split(" "),m="Webkit Moz O ms",n=m.split(" "),o=m.toLowerCase().split(" "),p={svg:"http://www.w3.org/2000/svg"},q={},r={},s={},t=[],u=t.slice,v,w=function(a,c,d,e){var h,i,j,k,l=b.createElement("div"),m=b.body,n=m||b.createElement("body");if(parseInt(d,10))while(d--)j=b.createElement("div"),j.id=e?e[d]:g+(d+1),l.appendChild(j);return h=["&#173;",'<style id="s',g,'">',a,"</style>"].join(""),l.id=g,(m?l:n).innerHTML+=h,n.appendChild(l),m||(n.style.background="",n.style.overflow="hidden",k=f.style.overflow,f.style.overflow="hidden",f.appendChild(n)),i=c(l,a),m?l.parentNode.removeChild(l):(n.parentNode.removeChild(n),f.style.overflow=k),!!i},x={}.hasOwnProperty,y;!B(x,"undefined")&&!B(x.call,"undefined")?y=function(a,b){return x.call(a,b)}:y=function(a,b){return b in a&&B(a.constructor.prototype[b],"undefined")},Function.prototype.bind||(Function.prototype.bind=function(b){var c=this;if(typeof c!="function")throw new TypeError;var d=u.call(arguments,1),e=function(){if(this instanceof e){var a=function(){};a.prototype=c.prototype;var f=new a,g=c.apply(f,d.concat(u.call(arguments)));return Object(g)===g?g:f}return c.apply(b,d.concat(u.call(arguments)))};return e}),q.touch=function(){var c;return"ontouchstart"in a||a.DocumentTouch&&b instanceof DocumentTouch?c=!0:w(["@media (",l.join("touch-enabled),("),g,")","{#modernizr{top:9px;position:absolute}}"].join(""),function(a){c=a.offsetTop===9}),c},q.cssanimations=function(){return F("animationName")},q.csstransforms=function(){return!!F("transform")},q.csstransitions=function(){return F("transition")},q.svg=function(){return!!b.createElementNS&&!!b.createElementNS(p.svg,"svg").createSVGRect};for(var G in q)y(q,G)&&(v=G.toLowerCase(),e[v]=q[G](),t.push((e[v]?"":"no-")+v));return e.addTest=function(a,b){if(typeof a=="object")for(var d in a)y(a,d)&&e.addTest(d,a[d]);else{a=a.toLowerCase();if(e[a]!==c)return e;b=typeof b=="function"?b():b,typeof enableClasses!="undefined"&&enableClasses&&(f.className+=" "+(b?"":"no-")+a),e[a]=b}return e},z(""),h=j=null,e._version=d,e._prefixes=l,e._domPrefixes=o,e._cssomPrefixes=n,e.testProp=function(a){return D([a])},e.testAllProps=F,e.testStyles=w,e.prefixed=function(a,b,c){return b?F(a,b,c):F(a,"pfx")},e}(window,window.document);
+    var Modernizr = (function (a, b, c) {
+      function z(a) {
+        i.cssText = a;
+      }
+      function A(a, b) {
+        return z(l.join(a + ";") + (b || ""));
+      }
+      function B(a, b) {
+        return typeof a === b;
+      }
+      function C(a, b) {
+        return !!~("" + a).indexOf(b);
+      }
+      function D(a, b) {
+        for (var d in a) {
+          var e = a[d];
+          if (!C(e, "-") && i[e] !== c) return b == "pfx" ? e : !0;
+        }
+        return !1;
+      }
+      function E(a, b, d) {
+        for (var e in a) {
+          var f = b[a[e]];
+          if (f !== c)
+            return d === !1 ? a[e] : B(f, "function") ? f.bind(d || b) : f;
+        }
+        return !1;
+      }
+      function F(a, b, c) {
+        var d = a.charAt(0).toUpperCase() + a.slice(1),
+          e = (a + " " + n.join(d + " ") + d).split(" ");
+        return B(b, "string") || B(b, "undefined")
+          ? D(e, b)
+          : ((e = (a + " " + o.join(d + " ") + d).split(" ")), E(e, b, c));
+      }
+      var d = "2.8.3",
+        e = {},
+        f = b.documentElement,
+        g = "modernizr",
+        h = b.createElement(g),
+        i = h.style,
+        j,
+        k = {}.toString,
+        l = " -webkit- -moz- -o- -ms- ".split(" "),
+        m = "Webkit Moz O ms",
+        n = m.split(" "),
+        o = m.toLowerCase().split(" "),
+        p = { svg: "http://www.w3.org/2000/svg" },
+        q = {},
+        r = {},
+        s = {},
+        t = [],
+        u = t.slice,
+        v,
+        w = function (a, c, d, e) {
+          var h,
+            i,
+            j,
+            k,
+            l = b.createElement("div"),
+            m = b.body,
+            n = m || b.createElement("body");
+          if (parseInt(d, 10))
+            while (d--)
+              (j = b.createElement("div")),
+                (j.id = e ? e[d] : g + (d + 1)),
+                l.appendChild(j);
+          return (
+            (h = ["&#173;", '<style id="s', g, '">', a, "</style>"].join("")),
+            (l.id = g),
+            ((m ? l : n).innerHTML += h),
+            n.appendChild(l),
+            m ||
+              ((n.style.background = ""),
+              (n.style.overflow = "hidden"),
+              (k = f.style.overflow),
+              (f.style.overflow = "hidden"),
+              f.appendChild(n)),
+            (i = c(l, a)),
+            m
+              ? l.parentNode.removeChild(l)
+              : (n.parentNode.removeChild(n), (f.style.overflow = k)),
+            !!i
+          );
+        },
+        x = {}.hasOwnProperty,
+        y;
+      !B(x, "undefined") && !B(x.call, "undefined")
+        ? (y = function (a, b) {
+            return x.call(a, b);
+          })
+        : (y = function (a, b) {
+            return b in a && B(a.constructor.prototype[b], "undefined");
+          }),
+        Function.prototype.bind ||
+          (Function.prototype.bind = function (b) {
+            var c = this;
+            if (typeof c != "function") throw new TypeError();
+            var d = u.call(arguments, 1),
+              e = function () {
+                if (this instanceof e) {
+                  var a = function () {};
+                  a.prototype = c.prototype;
+                  var f = new a(),
+                    g = c.apply(f, d.concat(u.call(arguments)));
+                  return Object(g) === g ? g : f;
+                }
+                return c.apply(b, d.concat(u.call(arguments)));
+              };
+            return e;
+          }),
+        (q.touch = function () {
+          var c;
+          return (
+            "ontouchstart" in a ||
+            (a.DocumentTouch && b instanceof DocumentTouch)
+              ? (c = !0)
+              : w(
+                  [
+                    "@media (",
+                    l.join("touch-enabled),("),
+                    g,
+                    ")",
+                    "{#modernizr{top:9px;position:absolute}}",
+                  ].join(""),
+                  function (a) {
+                    c = a.offsetTop === 9;
+                  }
+                ),
+            c
+          );
+        }),
+        (q.cssanimations = function () {
+          return F("animationName");
+        }),
+        (q.csstransforms = function () {
+          return !!F("transform");
+        }),
+        (q.csstransitions = function () {
+          return F("transition");
+        }),
+        (q.svg = function () {
+          return (
+            !!b.createElementNS &&
+            !!b.createElementNS(p.svg, "svg").createSVGRect
+          );
+        });
+      for (var G in q)
+        y(q, G) &&
+          ((v = G.toLowerCase()),
+          (e[v] = q[G]()),
+          t.push((e[v] ? "" : "no-") + v));
+      return (
+        (e.addTest = function (a, b) {
+          if (typeof a == "object")
+            for (var d in a) y(a, d) && e.addTest(d, a[d]);
+          else {
+            a = a.toLowerCase();
+            if (e[a] !== c) return e;
+            (b = typeof b == "function" ? b() : b),
+              typeof enableClasses != "undefined" &&
+                enableClasses &&
+                (f.className += " " + (b ? "" : "no-") + a),
+              (e[a] = b);
+          }
+          return e;
+        }),
+        z(""),
+        (h = j = null),
+        (e._version = d),
+        (e._prefixes = l),
+        (e._domPrefixes = o),
+        (e._cssomPrefixes = n),
+        (e.testProp = function (a) {
+          return D([a]);
+        }),
+        (e.testAllProps = F),
+        (e.testStyles = w),
+        (e.prefixed = function (a, b, c) {
+          return b ? F(a, b, c) : F(a, "pfx");
+        }),
+        e
+      );
+    })(window, window.document);
     /* jshint ignore:end */
 
     // Add indexOf() support to arrays for Internet Explorer 8
     if (!Array.prototype.indexOf) {
       Array.prototype.indexOf = function (searchElement, fromIndex) {
-        if ( this === undefined || this === null ) {
-          throw new TypeError( '"this" is null or not defined' );
+        if (this === undefined || this === null) {
+          throw new TypeError('"this" is null or not defined');
         }
 
         // Hack to convert object.length to a UInt32
@@ -279,7 +455,7 @@ function defineSequence(imagesLoaded, Hammer) {
           }
         }
 
-        for (;fromIndex < length; fromIndex++) {
+        for (; fromIndex < length; fromIndex++) {
           if (this[fromIndex] === searchElement) {
             return fromIndex;
           }
@@ -292,24 +468,19 @@ function defineSequence(imagesLoaded, Hammer) {
     /**
      * Determine the prefix to use for the pageVisibility API
      */
-    var hidden,
-        visibilityChange;
+    var hidden, visibilityChange;
 
     if (typeof document.hidden !== "undefined") {
-
       // Opera 12.10 and Firefox 18 and later support
       hidden = "hidden";
       visibilityChange = "visibilitychange";
     } else if (typeof document.mozHidden !== "undefined") {
-
       hidden = "mozHidden";
       visibilityChange = "mozvisibilitychange";
     } else if (typeof document.msHidden !== "undefined") {
-
       hidden = "msHidden";
       visibilityChange = "msvisibilitychange";
     } else if (typeof document.webkitHidden !== "undefined") {
-
       hidden = "webkitHidden";
       visibilityChange = "webkitvisibilitychange";
     }
@@ -321,10 +492,9 @@ function defineSequence(imagesLoaded, Hammer) {
      * @api private
      */
     function isArray(object) {
-
-      if (Object.prototype.toString.call(object) === '[object Array]') {
+      if (Object.prototype.toString.call(object) === "[object Array]") {
         return true;
-      }else {
+      } else {
         return false;
       }
     }
@@ -338,7 +508,6 @@ function defineSequence(imagesLoaded, Hammer) {
      * @api private
      */
     function extend(a, b) {
-
       for (var i in b) {
         a[i] = b[i];
       }
@@ -354,15 +523,15 @@ function defineSequence(imagesLoaded, Hammer) {
      * @returns {String} value - The value from the element's CSS property
      */
     function getStyle(element, property) {
-
       var value;
 
       // IE
       if (element.currentStyle) {
         value = element.currentStyle[property];
-      }
-
-      else if (document.defaultView && document.defaultView.getComputedStyle) {
+      } else if (
+        document.defaultView &&
+        document.defaultView.getComputedStyle
+      ) {
         value = document.defaultView.getComputedStyle(element, "")[property];
       }
 
@@ -378,17 +547,13 @@ function defineSequence(imagesLoaded, Hammer) {
      * @returns {Function} handler - Returns the handler so it can be removed
      */
     function addEvent(element, eventName, handler) {
-
       if (element.addEventListener) {
         element.addEventListener(eventName, handler, false);
 
         return handler;
-      }
-
-      else if (element.attachEvent) {
-
+      } else if (element.attachEvent) {
         // Allows IE to return this keyword
-        var handlerr = function() {
+        var handlerr = function () {
           handler.call(element);
         };
 
@@ -396,7 +561,6 @@ function defineSequence(imagesLoaded, Hammer) {
 
         return handlerr;
       }
-
     }
 
     /**
@@ -407,12 +571,9 @@ function defineSequence(imagesLoaded, Hammer) {
      * @param {Function} handler - The function to execute when the event occurs
      */
     function removeEvent(element, eventName, handler) {
-
       if (element.addEventListener) {
         element.removeEventListener(eventName, handler, false);
-      }
-
-      else if (element.detachEvent) {
+      } else if (element.detachEvent) {
         element.detachEvent("on" + eventName, handler);
       }
     }
@@ -426,20 +587,18 @@ function defineSequence(imagesLoaded, Hammer) {
      * @api private
      */
     function convertTimeToMs(time) {
-
-      var convertedTime,
-          fraction;
+      var convertedTime, fraction;
 
       // Deal with milliseconds and seconds
       if (time.indexOf("ms") > -1) {
         fraction = 1;
-      }else {
+      } else {
         fraction = 1000;
       }
 
       if (time == "0s") {
         convertedTime = 0;
-      }else {
+      } else {
         convertedTime = parseFloat(time.replace("s", "")) * fraction;
       }
 
@@ -455,12 +614,11 @@ function defineSequence(imagesLoaded, Hammer) {
      * @api private
      */
     function hasClass(element, name) {
-
       if (element === undefined) {
         return;
       }
 
-      return new RegExp('(\\s|^)' + name + '(\\s|$)').test(element.className);
+      return new RegExp("(\\s|^)" + name + "(\\s|$)").test(element.className);
     }
 
     /**
@@ -471,10 +629,7 @@ function defineSequence(imagesLoaded, Hammer) {
      * @api private
      */
     function addClass(elements, name) {
-
-      var element,
-          elementsLength,
-          i;
+      var element, elementsLength, i;
 
       // If only one element is defined, turn it into a nodelist so it'll pass
       // through the for loop
@@ -486,11 +641,10 @@ function defineSequence(imagesLoaded, Hammer) {
       elementsLength = elements.length;
 
       for (i = 0; i < elementsLength; i++) {
-
         element = elements[i];
 
         if (hasClass(element, name) === false) {
-          element.className += (element.className ? ' ': '') + name;
+          element.className += (element.className ? " " : "") + name;
         }
       }
     }
@@ -503,28 +657,24 @@ function defineSequence(imagesLoaded, Hammer) {
      * @api private
      */
     function removeClass(elements, name) {
-
-      var element,
-          elementsLength,
-          i;
+      var element, elementsLength, i;
 
       // If only one element is defined, turn it into a nodelist so it'll pass
       // through the for loop
       if (isArray(elements) === false) {
         elementsLength = 1;
         elements = [elements];
-      }
-
-      else {
+      } else {
         elementsLength = elements.length;
       }
 
       for (i = 0; i < elementsLength; i++) {
-
         element = elements[i];
 
         if (hasClass(element, name) === true) {
-          element.className = element.className.replace(new RegExp('(\\s|^)' + name + '(\\s|$)'),' ').replace(/^\s+|\s+$/g, '');
+          element.className = element.className
+            .replace(new RegExp("(\\s|^)" + name + "(\\s|$)"), " ")
+            .replace(/^\s+|\s+$/g, "");
         }
       }
     }
@@ -537,13 +687,17 @@ function defineSequence(imagesLoaded, Hammer) {
      * @param {Object} cursor - The event holding cursor properties
      */
     function insideElement(element, cursor) {
-
       // Get the elements boundaries
       var rect = element.getBoundingClientRect(),
-          inside = false;
+        inside = false;
 
       // Return true if inside the boundaries of the Sequence element
-      if (cursor.clientX >= rect.left && cursor.clientX <= rect.right && cursor.clientY >= rect.top && cursor.clientY <= rect.bottom) {
+      if (
+        cursor.clientX >= rect.left &&
+        cursor.clientX <= rect.right &&
+        cursor.clientY >= rect.top &&
+        cursor.clientY <= rect.bottom
+      ) {
         inside = true;
       }
 
@@ -567,16 +721,13 @@ function defineSequence(imagesLoaded, Hammer) {
      * @api private
      */
     function hasParent(parent, target, previousTarget) {
-
       if (target.nodeName === "BODY") {
         return false;
       }
 
       // We're at the pagination parent
       if (parent === target) {
-
         if (previousTarget !== undefined) {
-
           // Get the top level element clicked and all top level elements
           var topLevel = previousTarget;
           var allTopLevel = parent.getElementsByTagName(topLevel.nodeName);
@@ -587,7 +738,6 @@ function defineSequence(imagesLoaded, Hammer) {
           // Which top level element was clicked?
           while (i--) {
             if (topLevel === allTopLevel[i]) {
-
               // One-base the index and return it
               return i + 1;
             }
@@ -612,9 +762,8 @@ function defineSequence(imagesLoaded, Hammer) {
      * @api private
      */
     function getHammerDirection(swipeEvents) {
-
       var swipeDirections = 0,
-          hammerDirection = Hammer.DIRECTION_NONE;
+        hammerDirection = Hammer.DIRECTION_NONE;
 
       if (swipeEvents.left !== undefined || swipeEvents.right !== undefined) {
         swipeDirections += 1;
@@ -644,14 +793,13 @@ function defineSequence(imagesLoaded, Hammer) {
      * @api private
      */
     function addFeatureSupportClasses($el, Modernizr) {
-
       // TODO: Add support for all features used by Sequence and only manipulate
       // the DOM once. Currently this function just adds a class for the touch
       // feature. Probably best just to copy how Modernizr does it to implement
       // full list of features
 
       var prefix = "seq-",
-          support = "no-touch";
+        support = "no-touch";
 
       if (Modernizr.touch === true) {
         support = "touch";
@@ -664,21 +812,20 @@ function defineSequence(imagesLoaded, Hammer) {
 
     // Expose some of Sequence's private properties
     var self = {
-      modernizr: Modernizr
+      modernizr: Modernizr,
     };
 
     /**
      * Manage UI elements such as nextButton, prevButton, and pagination
      */
     self.ui = {
-
       // Default UI elements
       defaultElements: {
-        "nextButton": "seq-next",
-        "prevButton": "seq-prev",
-        "autoPlayButton": "seq-autoplay",
-        "pagination": "seq-pagination",
-        "preloader": "seq-preloader"
+        nextButton: "seq-next",
+        prevButton: "seq-prev",
+        autoPlayButton: "seq-autoplay",
+        pagination: "seq-pagination",
+        preloader: "seq-preloader",
       },
 
       /**
@@ -688,22 +835,21 @@ function defineSequence(imagesLoaded, Hammer) {
        * @returns {Boolean | HTMLElement} option - True if using the default
        * element, else an HTMLElement
        */
-      getElements: function(type, option) {
-
+      getElements: function (type, option) {
         var element,
-            elements,
-            elementsLength,
-            relatedElements = [],
-            rel,
-            i;
+          elements,
+          elementsLength,
+          relatedElements = [],
+          rel,
+          i;
 
         // Get the element being used
         if (option === true) {
-
           // Default elements
-          elements = document.querySelectorAll("." + this.defaultElements[type]);
+          elements = document.querySelectorAll(
+            "." + this.defaultElements[type]
+          );
         } else {
-
           // Custom elements
           elements = document.querySelectorAll(option);
         }
@@ -714,7 +860,6 @@ function defineSequence(imagesLoaded, Hammer) {
         // for either a global element or one with a rel attribute the same
         // as this instances ID
         for (i = 0; i < elementsLength; i++) {
-
           element = elements[i];
           rel = element.getAttribute("rel");
 
@@ -732,18 +877,22 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {HTMLElement} element - The element to show
        * @param {Number} duration - The duration to show the element over
        */
-      show: function(element, duration) {
-
+      show: function (element, duration) {
         if (self.propertySupport.transitions === true) {
-
-          element.style[Modernizr.prefixed("transitionDuration")] = duration + "ms";
-          element.style[Modernizr.prefixed("transitionProperty")] = "opacity, " + Modernizr.prefixed("transform");
+          element.style[Modernizr.prefixed("transitionDuration")] =
+            duration + "ms";
+          element.style[Modernizr.prefixed("transitionProperty")] =
+            "opacity, " + Modernizr.prefixed("transform");
           element.style.opacity = 1;
-        }
-
-        else {
-
-          self.animationFallback.animate(element, "opacity", "", 0, 1, duration);
+        } else {
+          self.animationFallback.animate(
+            element,
+            "opacity",
+            "",
+            0,
+            1,
+            duration
+          );
         }
       },
 
@@ -755,38 +904,40 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Function} callback - Function to execute when the element is
        * hidden
        */
-      hide: function(element, duration, callback) {
-
+      hide: function (element, duration, callback) {
         if (self.propertySupport.transitions === true) {
-
-          element.style[Modernizr.prefixed("transitionDuration")] = duration + "ms";
-          element.style[Modernizr.prefixed("transitionProperty")] = "opacity, " + Modernizr.prefixed("transform");
+          element.style[Modernizr.prefixed("transitionDuration")] =
+            duration + "ms";
+          element.style[Modernizr.prefixed("transitionProperty")] =
+            "opacity, " + Modernizr.prefixed("transform");
           element.style.opacity = 0;
-        }
-
-        else {
-
-          self.animationFallback.animate(element, "opacity", "", 1, 0, duration);
+        } else {
+          self.animationFallback.animate(
+            element,
+            "opacity",
+            "",
+            1,
+            0,
+            duration
+          );
         }
 
         if (callback !== undefined) {
-          self.hideTimer = setTimeout(function() {
+          self.hideTimer = setTimeout(function () {
             callback();
           }, duration);
         }
-      }
+      },
     };
 
     /**
      * Methods relating to autoPlay
      */
     self.autoPlay = {
-
       /**
        * Initiate autoPlay
        */
-      init: function() {
-
+      init: function () {
         self.isAutoPlayPaused = false;
         self.isAutoPlaying = false;
       },
@@ -804,13 +955,10 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Number} startDelay - The delay applied via options.autoPlayDelay
        * @param {Number} autoPlayInterval - The delay applied via options.autoPlayInterval
        */
-      getDelay: function(delay, startDelay, autoPlayInterval) {
-
+      getDelay: function (delay, startDelay, autoPlayInterval) {
         switch (delay) {
-
           case true:
-
-            delay = (startDelay === null) ? autoPlayInterval: startDelay;
+            delay = startDelay === null ? autoPlayInterval : startDelay;
             break;
 
           case false:
@@ -833,8 +981,7 @@ function defineSequence(imagesLoaded, Hammer) {
        * @returns false - When autoPlay is already active and can't be started
        * again
        */
-      start: function(delay, continuing) {
-
+      start: function (delay, continuing) {
         // Only start once
         if (self.isAutoPlaying === true || self.isReady === false) {
           return false;
@@ -843,7 +990,11 @@ function defineSequence(imagesLoaded, Hammer) {
         var options = self.options;
 
         // Which delay should we use?
-        delay = this.getDelay(delay, options.autoPlayDelay, options.autoPlayInterval);
+        delay = this.getDelay(
+          delay,
+          options.autoPlayDelay,
+          options.autoPlayInterval
+        );
 
         // Callback (only to be triggered when autoPlay is continuing from a
         // previous cycle)
@@ -861,13 +1012,11 @@ function defineSequence(imagesLoaded, Hammer) {
         // Only start a new autoPlay timer if Sequence isn't already animating.
         // If it is, a new one will be started at the end of the animation.
         if (self.isAnimating === false) {
-
           // Choose the direction and start autoPlay
-          self.autoPlayTimer = setTimeout(function() {
-
+          self.autoPlayTimer = setTimeout(function () {
             if (options.autoPlayDirection === 1) {
               self.next();
-            }else {
+            } else {
               self.prev();
             }
           }, delay);
@@ -879,8 +1028,7 @@ function defineSequence(imagesLoaded, Hammer) {
       /**
        * Stop autoPlay
        */
-      stop: function() {
-
+      stop: function () {
         if (self.options.autoPlay === true && self.isAutoPlaying === true) {
           self.options.autoPlay = false;
           self.isAutoPlaying = false;
@@ -904,10 +1052,8 @@ function defineSequence(imagesLoaded, Hammer) {
        * autoPlay.pause() and autoPlay.unpause() are used internally to
        * temporarily stop autoPlay when hovered over.
        */
-      unpause: function() {
-
+      unpause: function () {
         if (self.isAutoPlayPaused === true) {
-
           self.isAutoPlayPaused = false;
           this.start(true);
         } else {
@@ -923,31 +1069,26 @@ function defineSequence(imagesLoaded, Hammer) {
        * autoPlay.pause() and autoPlay.unpause() are used internally to
        * temporarily stop autoPlay when hovered over.
        */
-      pause: function() {
-
+      pause: function () {
         if (self.options.autoPlay === true) {
-
           self.isAutoPlayPaused = true;
           this.stop();
-
         } else {
           return false;
         }
 
         return true;
-      }
+      },
     };
 
     /**
      * Controls Sequence's canvas
      */
     self.canvas = {
-
       /**
        * Setup the canvas, screen, and steps ready to be animated
        */
-      init: function(id) {
-
+      init: function (id) {
         if (self.$screen !== undefined) {
           self.$screen.style.height = "100%";
           self.$screen.style.width = "100%";
@@ -965,21 +1106,19 @@ function defineSequence(imagesLoaded, Hammer) {
        * @returns {Array} steps - The elements that make up Sequence's steps
        * @api private
        */
-      getSteps: function(canvas) {
-
+      getSteps: function (canvas) {
         var steps = [],
-            stepId,
-            step,
-            stepElements = canvas.children,
-            stepsLength = stepElements.length,
-            i;
+          stepId,
+          step,
+          stepElements = canvas.children,
+          stepsLength = stepElements.length,
+          i;
 
         // Where we'll save info about the animation
         self.stepProperties = {};
 
         // Get the steps that have a parent with a class of "seq-canvas"
         for (i = 0; i < stepsLength; i++) {
-
           step = stepElements[i];
           stepId = i + 1;
 
@@ -999,22 +1138,17 @@ function defineSequence(imagesLoaded, Hammer) {
        * required for the canvas so it can move to each step
        *
        */
-      getTransformProperties: function() {
-
-        var i,
-            step,
-            stepId,
-            canvasTransform;
+      getTransformProperties: function () {
+        var i, step, stepId, canvasTransform;
 
         for (i = 0; i < self.noOfSteps; i++) {
-
           step = self.$steps[i];
           stepId = i + 1;
 
           canvasTransform = {
-            "seqX": 0,
-            "seqY": 0,
-            "seqZ": 0
+            seqX: 0,
+            seqY: 0,
+            seqZ: 0,
           };
 
           // Invert the steps offsetLeft and offsetTop to the canvas will always
@@ -1032,13 +1166,11 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Number} id - The ID of the step to move to
        * @param {Boolean} animate - Should the canvas animate or snap?
        */
-      move: function(id, animate) {
-
+      move: function (id, animate) {
         if (self.options.animateCanvas === true) {
-
           // Get the canvas element and step element to animate to
           var duration = 0,
-              transforms;
+            transforms;
 
           // Should the canvas animate?
           if (animate === true && self.firstRun === false) {
@@ -1047,12 +1179,21 @@ function defineSequence(imagesLoaded, Hammer) {
 
           // Animate the canvas using CSS transitions
           if (self.isFallbackMode === false) {
-
             transforms = self.stepProperties[id].canvasTransform;
 
             // Apply the transform CSS to the canvas
-            self.$canvas.style[Modernizr.prefixed("transitionDuration")] = duration + "ms";
-            self.$canvas.style[Modernizr.prefixed("transform")] = "translateX(" + transforms.seqX + "px) " + "translateY(" + transforms.seqY + "px) " + "translateZ(" + transforms.seqZ + "px) ";
+            self.$canvas.style[Modernizr.prefixed("transitionDuration")] =
+              duration + "ms";
+            self.$canvas.style[Modernizr.prefixed("transform")] =
+              "translateX(" +
+              transforms.seqX +
+              "px) " +
+              "translateY(" +
+              transforms.seqY +
+              "px) " +
+              "translateZ(" +
+              transforms.seqZ +
+              "px) ";
           }
 
           return true;
@@ -1067,8 +1208,7 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Object} self - Properties and methods available to this instance
        * @api private
        */
-      removeNoJsClass: function() {
-
+      removeNoJsClass: function () {
         if (self.isFallbackMode === true) {
           return;
         }
@@ -1084,14 +1224,13 @@ function defineSequence(imagesLoaded, Hammer) {
             removeClass(element, "seq-in");
           }
         }
-      }
+      },
     };
 
     /**
      * Controls Sequence's step animations
      */
     self.animation = {
-
       /**
        * Get the properties of a phase
        *
@@ -1101,30 +1240,33 @@ function defineSequence(imagesLoaded, Hammer) {
        * elements, timings object containing maxDuration, maxDelay, and
        * maxLength
        */
-      getPhaseProperties: function(stepId) {
-
+      getPhaseProperties: function (stepId) {
         var stepElement = self.$steps[stepId - 1],
-            stepAnimatedChildren = stepElement.querySelectorAll("*[data-seq]"),
-            stepChildren = stepElement.querySelectorAll("*"),
-            stepChildrenLength = stepChildren.length,
-            el,
-            i,
-            watchedDurations = [],
-            watchedDelays = [],
-            watchedLengths = [],
-            durations = [],
-            delays = [],
-            lengths = [],
-            duration,
-            delay;
+          stepAnimatedChildren = stepElement.querySelectorAll("*[data-seq]"),
+          stepChildren = stepElement.querySelectorAll("*"),
+          stepChildrenLength = stepChildren.length,
+          el,
+          i,
+          watchedDurations = [],
+          watchedDelays = [],
+          watchedLengths = [],
+          durations = [],
+          delays = [],
+          lengths = [],
+          duration,
+          delay;
 
         // Get the animation length of each element (duration + delay) and save
         // for comparisson
         for (i = 0; i < stepChildrenLength; i++) {
           el = stepChildren[i];
 
-          duration = convertTimeToMs(getStyle(el, Modernizr.prefixed("transitionDuration")));
-          delay = convertTimeToMs(getStyle(el, Modernizr.prefixed("transitionDelay")));
+          duration = convertTimeToMs(
+            getStyle(el, Modernizr.prefixed("transitionDuration"))
+          );
+          delay = convertTimeToMs(
+            getStyle(el, Modernizr.prefixed("transitionDelay"))
+          );
 
           // Save this elements animation length for all elements
           durations.push(duration);
@@ -1141,13 +1283,13 @@ function defineSequence(imagesLoaded, Hammer) {
 
         // Which were the longest durations and delays?
         var maxDuration = Math.max.apply(Math, durations),
-            maxDelay = Math.max.apply(Math, delays),
-            maxTotal = Math.max.apply(Math, lengths);
+          maxDelay = Math.max.apply(Math, delays),
+          maxTotal = Math.max.apply(Math, lengths);
 
         // Which were the longest watched durations and delays?
         var watchedMaxDuration = Math.max.apply(Math, watchedDurations),
-            watchedMaxDelay = Math.max.apply(Math, watchedDelays),
-            watchedMaxTotal = Math.max.apply(Math, watchedLengths);
+          watchedMaxDelay = Math.max.apply(Math, watchedDelays),
+          watchedMaxTotal = Math.max.apply(Math, watchedLengths);
 
         return {
           stepId: stepId,
@@ -1157,13 +1299,13 @@ function defineSequence(imagesLoaded, Hammer) {
           watchedTimings: {
             maxDuration: watchedMaxDuration,
             maxDelay: watchedMaxDelay,
-            maxTotal: watchedMaxTotal
+            maxTotal: watchedMaxTotal,
           },
           timings: {
             maxDuration: maxDuration,
             maxDelay: maxDelay,
-            maxTotal: maxTotal
-          }
+            maxTotal: maxTotal,
+          },
         };
       },
 
@@ -1171,18 +1313,24 @@ function defineSequence(imagesLoaded, Hammer) {
        * How long before the next phase should start?
        * Ignore the phaseThreshold (on first run for example)
        */
-      getPhaseThreshold: function(ignorePhaseThreshold, phaseThresholdOption, isAnimating, currentPhaseDuration) {
-
+      getPhaseThreshold: function (
+        ignorePhaseThreshold,
+        phaseThresholdOption,
+        isAnimating,
+        currentPhaseDuration
+      ) {
         var phaseThresholdTime = 0;
 
         // Ignore the phaseThreshold if the developer wishes for this to happen
         // if Sequence.js is animating
-        if (isAnimating === true && self.options.ignorePhaseThresholdWhenSkipped === true) {
+        if (
+          isAnimating === true &&
+          self.options.ignorePhaseThresholdWhenSkipped === true
+        ) {
           ignorePhaseThreshold = true;
         }
 
         if (ignorePhaseThreshold === undefined) {
-
           if (phaseThresholdOption === true) {
             // The phaseThreshold should be the length of the current phase
             // so the next starts immediately after
@@ -1210,17 +1358,26 @@ function defineSequence(imagesLoaded, Hammer) {
        * @returns {Object} - Contains times that should delay the next or
        * current phase accordingly
        */
-       getReversePhaseDelay: function(currentPhaseTotal, nextPhaseTotal, phaseThresholdOption, ignorePhaseThresholdWhenSkippedOption, isAnimating) {
-
+      getReversePhaseDelay: function (
+        currentPhaseTotal,
+        nextPhaseTotal,
+        phaseThresholdOption,
+        ignorePhaseThresholdWhenSkippedOption,
+        isAnimating
+      ) {
         var phaseDifference = 0,
-            current = 0,
-            next = 0;
+          current = 0,
+          next = 0;
 
         // Only use a reversePhaseDelay if the phaseThreshold option is true or
         // a custom time, and Sequence is not animating with the
         // ignorePhaseThreshold option on
-        if (phaseThresholdOption !== true && (ignorePhaseThresholdWhenSkippedOption === false || isAnimating === false)) {
-            phaseDifference = currentPhaseTotal - nextPhaseTotal;
+        if (
+          phaseThresholdOption !== true &&
+          (ignorePhaseThresholdWhenSkippedOption === false ||
+            isAnimating === false)
+        ) {
+          phaseDifference = currentPhaseTotal - nextPhaseTotal;
 
           if (phaseDifference > 0) {
             next = phaseDifference;
@@ -1231,7 +1388,7 @@ function defineSequence(imagesLoaded, Hammer) {
 
         return {
           next: next,
-          current: current
+          current: current,
         };
       },
 
@@ -1243,12 +1400,10 @@ function defineSequence(imagesLoaded, Hammer) {
        * the top
        * @param {HTMLElement} nextElement - The next step to be moved to the top
        */
-      moveActiveStepToTop: function(currentElement, nextElement) {
-
+      moveActiveStepToTop: function (currentElement, nextElement) {
         if (self.options.moveActiveStepToTop === true) {
-
           var prevStepElement = self.$steps[self.prevStepId - 1],
-              lastStepId = self.noOfSteps - 1;
+            lastStepId = self.noOfSteps - 1;
 
           prevStepElement.style.zIndex = 1;
           currentElement.style.zIndex = lastStepId;
@@ -1265,29 +1420,22 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Number} id - The ID of the step Sequence is trying to go to
        * @param {HTMLObject} nextStepElement - The element for the next step
        */
-      manageNavigationSkip: function(id, nextStepElement) {
-
+      manageNavigationSkip: function (id, nextStepElement) {
         if (self.isFallbackMode === true) {
           return;
         }
 
-        var i,
-            stepProperties,
-            stepElement,
-            stepId,
-            phaseSkipped;
+        var i, stepProperties, stepElement, stepId, phaseSkipped;
 
         // Show the next step again
         self.ui.show(nextStepElement, 0);
 
         if (self.options.navigationSkip === true) {
-
           // Start the navigation skip threshold
           self.navigationSkipThresholdActive = true;
 
           // Are there steps currently animating that need to be faded out?
           if (self.phasesAnimating !== 0) {
-
             // If a step is waiting to animate in based on the phaseThreshold,
             // cancel it
             clearTimeout(self.phaseThresholdTimer);
@@ -1296,11 +1444,9 @@ function defineSequence(imagesLoaded, Hammer) {
             // Fade a step if the user navigates to another prior to its
             // animation finishing
             if (self.options.fadeStepWhenSkipped === true) {
-
               // Fade all elements that are animating
               // (not including the current one)
               for (i = 1; i <= self.noOfSteps; i++) {
-
                 stepProperties = self.stepProperties[i];
 
                 // Deal with the steps that were skipped whilst still animating
@@ -1324,7 +1470,7 @@ function defineSequence(imagesLoaded, Hammer) {
 
           // Start the navigationSkipThreshold timer to prevent being able to
           // navigate too quickly
-          self.navigationSkipThresholdTimer = setTimeout(function() {
+          self.navigationSkipThresholdTimer = setTimeout(function () {
             self.navigationSkipThresholdActive = false;
           }, self.options.navigationSkipThreshold);
         }
@@ -1335,18 +1481,14 @@ function defineSequence(imagesLoaded, Hammer) {
        *
        * @param {HTMLElement} stepElement - The step element that was skipped
        */
-      stepSkipped: function(stepElement) {
-
+      stepSkipped: function (stepElement) {
         // TODO: Add resetWhenStepSkipped option -
         // https://github.com/IanLunn/Sequence/issues/257
         // Reset the skipped steps current and next phase ended timers and trigger
         // them as soon as the steps have faded out
 
         // Fade the step out
-        self.ui.hide(stepElement, self.options.fadeStepTime, function() {
-
-        });
-
+        self.ui.hide(stepElement, self.options.fadeStepTime, function () {});
       },
 
       /**
@@ -1354,19 +1496,17 @@ function defineSequence(imagesLoaded, Hammer) {
        *
        * @param {Number} id - The ID of the step to change
        */
-      changeStep: function(id) {
-
+      changeStep: function (id) {
         // Get the step to add
         var stepToAdd = "seq-step" + id;
 
         // Add the new step and remove the previous
         if (self.currentStepId !== undefined) {
-
           var stepToRemove = "seq-step" + self.currentStepId;
 
           addClass(self.$container, stepToAdd);
           removeClass(self.$container, stepToRemove);
-        }else {
+        } else {
           addClass(self.$container, stepToAdd);
         }
       },
@@ -1386,30 +1526,38 @@ function defineSequence(imagesLoaded, Hammer) {
        * @returns {Number} maxWatchedTotal - The new total length
        * (duration + delay) for watched elements when reversed
        */
-      reverseProperties: function(phaseProperties, phaseDelay, phaseThresholdTime, ignorePhaseThreshold) {
-
+      reverseProperties: function (
+        phaseProperties,
+        phaseDelay,
+        phaseThresholdTime,
+        ignorePhaseThreshold
+      ) {
         var animation = this,
-            phaseElements = phaseProperties.children,
-            noOfPhaseElements = phaseElements.length,
-            stepDurations = phaseProperties.timings,
-            el,
-            i,
-            timingFunction,
-            timingFunctionReversed,
-            duration,
-            delay,
-            total,
-            maxTotal,
-            maxWatchedTotal,
-            totals = [],
-            watchedTotals = [];
+          phaseElements = phaseProperties.children,
+          noOfPhaseElements = phaseElements.length,
+          stepDurations = phaseProperties.timings,
+          el,
+          i,
+          timingFunction,
+          timingFunctionReversed,
+          duration,
+          delay,
+          total,
+          maxTotal,
+          maxWatchedTotal,
+          totals = [],
+          watchedTotals = [];
 
         for (i = 0; i < noOfPhaseElements; i++) {
           el = phaseElements[i];
 
           // Get each element's duration and delay
-          duration = convertTimeToMs(getStyle(el, Modernizr.prefixed("transitionDuration")));
-          delay = convertTimeToMs(getStyle(el, Modernizr.prefixed("transitionDelay")));
+          duration = convertTimeToMs(
+            getStyle(el, Modernizr.prefixed("transitionDuration"))
+          );
+          delay = convertTimeToMs(
+            getStyle(el, Modernizr.prefixed("transitionDelay"))
+          );
 
           // Save the total
           total = duration + delay;
@@ -1437,11 +1585,16 @@ function defineSequence(imagesLoaded, Hammer) {
           }
 
           // Get the timing-function and reverse it
-          timingFunction = getStyle(el, Modernizr.prefixed("transitionTimingFunction"));
-          timingFunctionReversed = animation.reverseTimingFunction(timingFunction);
+          timingFunction = getStyle(
+            el,
+            Modernizr.prefixed("transitionTimingFunction")
+          );
+          timingFunctionReversed =
+            animation.reverseTimingFunction(timingFunction);
 
           // Apply the reversed transition properties to each element
-          el.style[Modernizr.prefixed("transition")] = duration + "ms " + delay + "ms " + timingFunctionReversed;
+          el.style[Modernizr.prefixed("transition")] =
+            duration + "ms " + delay + "ms " + timingFunctionReversed;
         }
 
         // Get the longest total and delay of the reversed animations
@@ -1454,8 +1607,8 @@ function defineSequence(imagesLoaded, Hammer) {
         // Remove the reversed transition properties from each element once it
         // has finished animating; allowing for the inherited styles to take
         // effect again.
-        setTimeout(function() {
-          animation.domDelay(function() {
+        setTimeout(function () {
+          animation.domDelay(function () {
             for (i = 0; i < noOfPhaseElements; i++) {
               el = phaseElements[i];
 
@@ -1477,15 +1630,19 @@ function defineSequence(imagesLoaded, Hammer) {
        * transitionThreshold setting and immediately go to the specified step
        * @param {Boolean} hashTagNav - If navigation is triggered by the hashTag
        */
-      forward: function(id, currentStepElement, nextStepElement, ignorePhaseThreshold, hashTagNav) {
-
+      forward: function (
+        id,
+        currentStepElement,
+        nextStepElement,
+        ignorePhaseThreshold,
+        hashTagNav
+      ) {
         var animation = this,
-            currentPhaseProperties,
-            currentPhaseTotal,
-            phaseThresholdTime;
+          currentPhaseProperties,
+          currentPhaseTotal,
+          phaseThresholdTime;
 
         if (self.firstRun === false) {
-
           // Callback
           animation.currentPhaseStarted(self.currentStepId);
         }
@@ -1493,22 +1650,36 @@ function defineSequence(imagesLoaded, Hammer) {
         // Snap the step to the "animate-start" phase
         removeClass(nextStepElement, "seq-out");
 
-        animation.domDelay(function() {
-
+        animation.domDelay(function () {
           // Make the current step transition to "seq-out"
-          currentPhaseProperties = animation.startAnimateOut(self.currentStepId, currentStepElement, 1);
+          currentPhaseProperties = animation.startAnimateOut(
+            self.currentStepId,
+            currentStepElement,
+            1
+          );
 
           // Total duration of the current phase (duration + delay)
           currentPhaseTotal = currentPhaseProperties.watchedTimings.maxTotal;
 
           // How long before the next phase should start?
-          phaseThresholdTime = animation.getPhaseThreshold(ignorePhaseThreshold, self.options.phaseThreshold, self.isAnimating, currentPhaseTotal);
+          phaseThresholdTime = animation.getPhaseThreshold(
+            ignorePhaseThreshold,
+            self.options.phaseThreshold,
+            self.isAnimating,
+            currentPhaseTotal
+          );
 
           // Sequence is now animating
           self.isAnimating = true;
 
           // Make the next step transition to "seq-in"
-          animation.startAnimateIn(id, currentPhaseTotal, nextStepElement, phaseThresholdTime, hashTagNav);
+          animation.startAnimateIn(
+            id,
+            currentPhaseTotal,
+            nextStepElement,
+            phaseThresholdTime,
+            hashTagNav
+          );
         });
       },
 
@@ -1522,29 +1693,41 @@ function defineSequence(imagesLoaded, Hammer) {
        * transitionThreshold setting and immediately go to the specified step
        * @param {Boolean} hashTagNav - If navigation is triggered by the hashTag
        */
-      reverse: function(id, currentStepElement, nextStepElement, ignorePhaseThreshold, hashTagNav) {
-
+      reverse: function (
+        id,
+        currentStepElement,
+        nextStepElement,
+        ignorePhaseThreshold,
+        hashTagNav
+      ) {
         var animation = this,
-            currentId,
-            reversePhaseDelay,
-            phaseThresholdTime = 0,
-            currentPhaseProperties,
-            nextPhaseProperties,
-            currentPhaseTotal,
-            nextPhaseTotal;
+          currentId,
+          reversePhaseDelay,
+          phaseThresholdTime = 0,
+          currentPhaseProperties,
+          nextPhaseProperties,
+          currentPhaseTotal,
+          nextPhaseTotal;
 
         // Snap the next phase to "animate-out"
         addClass(nextStepElement, "seq-out");
 
-        animation.domDelay(function() {
-
+        animation.domDelay(function () {
           // Get the step number, element, its animated elements (child nodes),
           // and max timings
-          currentPhaseProperties = animation.getPhaseProperties(self.currentStepId, "current");
+          currentPhaseProperties = animation.getPhaseProperties(
+            self.currentStepId,
+            "current"
+          );
           nextPhaseProperties = animation.getPhaseProperties(id, "next");
 
           // Determine the gap between phases based on the phaseThreshold option
-          phaseThresholdTime = animation.getPhaseThreshold(ignorePhaseThreshold, self.options.phaseThreshold, self.isAnimating, currentPhaseProperties.timings.maxTotal);
+          phaseThresholdTime = animation.getPhaseThreshold(
+            ignorePhaseThreshold,
+            self.options.phaseThreshold,
+            self.isAnimating,
+            currentPhaseProperties.timings.maxTotal
+          );
 
           // Determine if there should be a delay to account for one phase
           // finishing before the other.
@@ -1552,27 +1735,54 @@ function defineSequence(imagesLoaded, Hammer) {
           // 1s (A) and the current element over 2s (B). When reversed, the next
           // element (previouly the current element) should wait 1s (B - A)
           // before animating back in
-          reversePhaseDelay = animation.getReversePhaseDelay(currentPhaseProperties.timings.maxTotal, nextPhaseProperties.timings.maxTotal, self.options.phaseThreshold, self.options.ignorePhaseThresholdWhenSkipped, self.isAnimating);
+          reversePhaseDelay = animation.getReversePhaseDelay(
+            currentPhaseProperties.timings.maxTotal,
+            nextPhaseProperties.timings.maxTotal,
+            self.options.phaseThreshold,
+            self.options.ignorePhaseThresholdWhenSkipped,
+            self.isAnimating
+          );
 
           // Reverse properties for all elements in the current and next step
           // and add the reversePhaseDelay as a transition-delay where necessary
-          currentPhaseTotal = animation.reverseProperties(currentPhaseProperties, reversePhaseDelay.current, 0, ignorePhaseThreshold);
-          nextPhaseTotal = animation.reverseProperties(nextPhaseProperties, reversePhaseDelay.next, phaseThresholdTime, ignorePhaseThreshold);
+          currentPhaseTotal = animation.reverseProperties(
+            currentPhaseProperties,
+            reversePhaseDelay.current,
+            0,
+            ignorePhaseThreshold
+          );
+          nextPhaseTotal = animation.reverseProperties(
+            nextPhaseProperties,
+            reversePhaseDelay.next,
+            phaseThresholdTime,
+            ignorePhaseThreshold
+          );
 
           // Make the current step transition to "animate-start"
-          animation.startAnimateOut(self.currentStepId, currentStepElement, -1, currentPhaseTotal);
+          animation.startAnimateOut(
+            self.currentStepId,
+            currentStepElement,
+            -1,
+            currentPhaseTotal
+          );
 
           // Sequence is now animating
           self.isAnimating = true;
 
           if (self.firstRun === false) {
-
             // Callbacks
             animation.currentPhaseStarted(self.currentStepId);
           }
 
           // Make the next step transition to "seq-in"
-          animation.startAnimateIn(id, currentPhaseTotal, nextStepElement, phaseThresholdTime, hashTagNav, nextPhaseTotal);
+          animation.startAnimateIn(
+            id,
+            currentPhaseTotal,
+            nextStepElement,
+            phaseThresholdTime,
+            hashTagNav,
+            nextPhaseTotal
+          );
         });
       },
 
@@ -1589,11 +1799,17 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Number} nextPhaseTotal - Amount of time in milliseconds the
        * next phase will animate for
        */
-      startAnimateIn: function(id, currentPhaseTotal, nextStepElement, phaseThresholdTime, hashTagNav, nextPhaseTotal) {
-
+      startAnimateIn: function (
+        id,
+        currentPhaseTotal,
+        nextStepElement,
+        phaseThresholdTime,
+        hashTagNav,
+        nextPhaseTotal
+      ) {
         var animation = this,
-            nextPhaseProperties,
-            stepDuration;
+          nextPhaseProperties,
+          stepDuration;
 
         // The next ID is now the current ID
         self.prevStepId = self.currentStepId;
@@ -1606,18 +1822,19 @@ function defineSequence(imagesLoaded, Hammer) {
 
         // When should the "seq-in" phase start and how long until the step
         // completely finishes animating?
-        if (self.firstRun === false || self.options.startingStepAnimatesIn === true) {
-
+        if (
+          self.firstRun === false ||
+          self.options.startingStepAnimatesIn === true
+        ) {
           self.stepProperties[id].isActive = true;
 
           // Callback
-          self.nextPhaseStartedTimer = setTimeout(function() {
+          self.nextPhaseStartedTimer = setTimeout(function () {
             animation.nextPhaseStarted(id, hashTagNav);
           }, phaseThresholdTime);
 
           // Start the "seq-in" phase
-          self.phaseThresholdTimer = setTimeout(function() {
-
+          self.phaseThresholdTimer = setTimeout(function () {
             // TODO: Change multiple classes via one function
             addClass(nextStepElement, "seq-in");
             removeClass(nextStepElement, "seq-out");
@@ -1625,27 +1842,36 @@ function defineSequence(imagesLoaded, Hammer) {
             // When animate-in is reversed, this will have already been passed
             // in as an argument so it's only needed for forward animation
             if (nextPhaseTotal === undefined) {
-              nextPhaseProperties = self.animation.getPhaseProperties(id, "next");
+              nextPhaseProperties = self.animation.getPhaseProperties(
+                id,
+                "next"
+              );
               nextPhaseTotal = nextPhaseProperties.watchedTimings.maxTotal;
             }
 
             // Wait for the next phase to end
-            animation.phaseEnded(id, "next", nextPhaseTotal, animation.nextPhaseEnded);
+            animation.phaseEnded(
+              id,
+              "next",
+              nextPhaseTotal,
+              animation.nextPhaseEnded
+            );
 
             // How long will it take for the step to end?
-            stepDuration = animation.getStepDuration(currentPhaseTotal, nextPhaseTotal, self.options.phaseThreshold);
+            stepDuration = animation.getStepDuration(
+              currentPhaseTotal,
+              nextPhaseTotal,
+              self.options.phaseThreshold
+            );
 
-            self.stepEndedTimer = setTimeout(function() {
-
+            self.stepEndedTimer = setTimeout(function () {
               self.animation.stepEnded(id);
             }, stepDuration);
-
           }, phaseThresholdTime);
         }
 
         // This is the first run. Snap the first step into place without animation
         else {
-
           // Set the first step's speed to 0 to have it immediately snap into place
           animation.resetInheritedSpeed(id);
 
@@ -1672,13 +1898,16 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Number} currentPhaseTotal - Amount of time in milliseconds the
        * current phase will animate for
        */
-      startAnimateOut: function(id, currentStepElement, direction, currentPhaseTotal) {
-
+      startAnimateOut: function (
+        id,
+        currentStepElement,
+        direction,
+        currentPhaseTotal
+      ) {
         var animation = this,
-        currentPhaseProperties;
+          currentPhaseProperties;
 
         if (direction === 1) {
-
           // TODO: Change multiple classes via one function
           // Make the current step transition to "animate-out"
           removeClass(currentStepElement, "seq-in");
@@ -1689,20 +1918,22 @@ function defineSequence(imagesLoaded, Hammer) {
           currentPhaseProperties = animation.getPhaseProperties(id, "current");
 
           currentPhaseTotal = currentPhaseProperties.watchedTimings.maxTotal;
-
         } else {
-
           // Make the current step transition to "animate-start"
           removeClass(currentStepElement, "seq-in");
         }
 
         if (self.firstRun === false) {
-
           // Add the steps to the list of active steps
           self.stepProperties[id].isActive = true;
 
           // Wait for the current phase to end
-          animation.phaseEnded(id, "current", currentPhaseTotal, animation.currentPhaseEnded);
+          animation.phaseEnded(
+            id,
+            "current",
+            currentPhaseTotal,
+            animation.currentPhaseEnded
+          );
         }
 
         return currentPhaseProperties;
@@ -1720,22 +1951,31 @@ function defineSequence(imagesLoaded, Hammer) {
        * @returns {Number} stepDuration - Which ever is longest, current or next
        * phase duration
        */
-      getStepDuration: function(currentPhaseTotal, nextPhaseTotal, phaseThresholdOption) {
-
+      getStepDuration: function (
+        currentPhaseTotal,
+        nextPhaseTotal,
+        phaseThresholdOption
+      ) {
         var stepDuration;
 
         switch (phaseThresholdOption) {
           case true:
             stepDuration = nextPhaseTotal;
-          break;
+            break;
 
           case false:
             // The stepDuration is whichever phase is longest
-            stepDuration = (currentPhaseTotal >= nextPhaseTotal) ? currentPhaseTotal : nextPhaseTotal;
-          break;
+            stepDuration =
+              currentPhaseTotal >= nextPhaseTotal
+                ? currentPhaseTotal
+                : nextPhaseTotal;
+            break;
 
           default:
-            stepDuration = (currentPhaseTotal >= nextPhaseTotal + phaseThresholdOption) ? (currentPhaseTotal) - phaseThresholdOption : nextPhaseTotal;
+            stepDuration =
+              currentPhaseTotal >= nextPhaseTotal + phaseThresholdOption
+                ? currentPhaseTotal - phaseThresholdOption
+                : nextPhaseTotal;
         }
 
         return stepDuration;
@@ -1744,8 +1984,7 @@ function defineSequence(imagesLoaded, Hammer) {
       /**
        * When the current phase starts animating
        */
-      currentPhaseStarted: function(id) {
-
+      currentPhaseStarted: function (id) {
         self.phasesAnimating++;
 
         // Callback
@@ -1755,8 +1994,7 @@ function defineSequence(imagesLoaded, Hammer) {
       /**
        * When the current phase finishes animating
        */
-      currentPhaseEnded: function(id) {
-
+      currentPhaseEnded: function (id) {
         // Callback
         self.currentPhaseEnded(id, self);
       },
@@ -1766,8 +2004,7 @@ function defineSequence(imagesLoaded, Hammer) {
        *
        * @param {Boolean} hashTagNav - If navigation is triggered by the hashTag
        */
-      nextPhaseStarted: function(id, hashTagNav) {
-
+      nextPhaseStarted: function (id, hashTagNav) {
         self.phasesAnimating++;
 
         // Update the hashTag if being used
@@ -1785,11 +2022,9 @@ function defineSequence(imagesLoaded, Hammer) {
       /**
        * When the next phase finishes animating
        */
-      nextPhaseEnded: function(id) {
-
+      nextPhaseEnded: function (id) {
         // Callback
         self.nextPhaseEnded(id, self);
-
       },
 
       /**
@@ -1800,12 +2035,11 @@ function defineSequence(imagesLoaded, Hammer) {
        * ends (in milliseconds)
        * @param {Function} callback - A function to execute when the phase ends
        */
-      phaseEnded: function(id, phase, phaseDuration, callback) {
-
+      phaseEnded: function (id, phase, phaseDuration, callback) {
         var animation = this,
-            phaseEnded;
+          phaseEnded;
 
-        phaseEnded = function(id) {
+        phaseEnded = function (id) {
           self.stepProperties[id].isActive = false;
           self.phasesAnimating--;
 
@@ -1814,15 +2048,11 @@ function defineSequence(imagesLoaded, Hammer) {
         };
 
         if (phase === "current") {
-
-          self.currentPhaseEndedTimer = setTimeout(function() {
-
+          self.currentPhaseEndedTimer = setTimeout(function () {
             phaseEnded(id);
           }, phaseDuration);
         } else {
-
-          self.nextPhaseEndedTimer = setTimeout(function() {
-
+          self.nextPhaseEndedTimer = setTimeout(function () {
             phaseEnded(id);
           }, phaseDuration);
         }
@@ -1835,18 +2065,17 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Number} stepDuration - The amount of time before the step
        * finishes animating
        */
-      stepEnded: function(id) {
+      stepEnded: function (id) {
+        self.isAnimating = false;
+        self.isAutoPlaying = false;
 
-          self.isAnimating = false;
-          self.isAutoPlaying = false;
+        // Continue with autoPlay if enabled
+        if (self.options.autoPlay === true) {
+          self.autoPlay.start(true, true);
+        }
 
-          // Continue with autoPlay if enabled
-          if (self.options.autoPlay === true) {
-            self.autoPlay.start(true, true);
-          }
-
-          // Callback
-          self.animationEnded(id, self);
+        // Callback
+        self.animationEnded(id, self);
       },
 
       /**
@@ -1855,11 +2084,10 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {String} phase - The phase to reverse
        * @returns {String} - The reversed phase
        */
-      reversePhase: function(phase) {
-
+      reversePhase: function (phase) {
         var reversePhase = {
-            "seq-out": "seq-in",
-            "seq-in": "seq-out"
+          "seq-out": "seq-in",
+          "seq-in": "seq-out",
         };
 
         return reversePhase[phase];
@@ -1881,9 +2109,8 @@ function defineSequence(imagesLoaded, Hammer) {
        *
        * @param {Function} callback - a function to run after the delay
        */
-      domDelay: function(callback) {
-
-        setTimeout(function() {
+      domDelay: function (callback) {
+        setTimeout(function () {
           callback();
         }, domThreshold);
       },
@@ -1894,30 +2121,25 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {String} timingFunction - The timing function to reverse
        * @returns {String} timingFunction - The reverse timing function
        */
-      reverseTimingFunction: function(timingFunction) {
-
-        if (timingFunction === '' || timingFunction === undefined) {
+      reverseTimingFunction: function (timingFunction) {
+        if (timingFunction === "" || timingFunction === undefined) {
           return timingFunction;
         }
 
         // Convert timingFunction keywords to a cubic-bezier function
         // This is needed because some browsers return a keyword, others a function
         var timingFunctionToCubicBezier = {
-          "linear"     : "cubic-bezier(0.0,0.0,1.0,1.0)",
-          "ease"       : "cubic-bezier(0.25, 0.1, 0.25, 1.0)",
-          "ease-in"    : "cubic-bezier(0.42, 0.0, 1.0, 1.0)",
+          linear: "cubic-bezier(0.0,0.0,1.0,1.0)",
+          ease: "cubic-bezier(0.25, 0.1, 0.25, 1.0)",
+          "ease-in": "cubic-bezier(0.42, 0.0, 1.0, 1.0)",
           "ease-in-out": "cubic-bezier(0.42, 0.0, 0.58, 1.0)",
-          "ease-out"   : "cubic-bezier(0.0, 0.0, 0.58, 1.0)"
+          "ease-out": "cubic-bezier(0.0, 0.0, 0.58, 1.0)",
         };
 
-        var cubicBezier,
-            cubicBezierLength,
-            reversedCubicBezier,
-            i;
+        var cubicBezier, cubicBezierLength, reversedCubicBezier, i;
 
         // Convert the timing function to a cubic-bezier if it is a keyword
         if (timingFunction.indexOf("cubic-bezier") < 0) {
-
           // TODO: Support multiple timing-functions
           // If the timing-function is made up of multiple functions, reduce it
           // to one only
@@ -1928,7 +2150,10 @@ function defineSequence(imagesLoaded, Hammer) {
         }
 
         // Remove the CSS function and just get the array of points
-        cubicBezier = timingFunction.replace("cubic-bezier(", "").replace(")", "").split(",");
+        cubicBezier = timingFunction
+          .replace("cubic-bezier(", "")
+          .replace(")", "")
+          .split(",");
         cubicBezierLength = cubicBezier.length;
 
         // Convert each point into a number (rather than a string)
@@ -1941,7 +2166,7 @@ function defineSequence(imagesLoaded, Hammer) {
           1 - cubicBezier[2],
           1 - cubicBezier[3],
           1 - cubicBezier[0],
-          1 - cubicBezier[1]
+          1 - cubicBezier[1],
         ];
 
         // Add the reversed cubic bezier back into a CSS function
@@ -1959,19 +2184,18 @@ function defineSequence(imagesLoaded, Hammer) {
        *
        * @param {String} step - The step that the elements we'll reset belong to
        */
-      resetInheritedSpeed: function(step) {
-
+      resetInheritedSpeed: function (step) {
         if (self.isFallbackMode === true) {
           return;
         }
 
         var animation = this,
-            el,
-            i;
+          el,
+          i;
 
         // Get the step's elements and count them
         var stepElements = self.$steps[step - 1].querySelectorAll("*"),
-            numberOfStepElements = stepElements.length;
+          numberOfStepElements = stepElements.length;
 
         // Temporarily apply a transition-duration and transition-delay to each
         // element we need to track.
@@ -1994,10 +2218,8 @@ function defineSequence(imagesLoaded, Hammer) {
         // Remove the temporary transition-duration and transition-delay from each
         // element now it has been manipulated; allowing for the inherited styles
         // to take effect again.
-        self.animation.domDelay(function() {
-
+        self.animation.domDelay(function () {
           for (i = 0; i < numberOfStepElements; i++) {
-
             el = stepElements[i];
             el.style[Modernizr.prefixed("transition")] = "";
           }
@@ -2012,21 +2234,30 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Number} definedDirection - The defined direction 1 or -1
        * @returns {Number} direction - The direction 1 or -1
        */
-      getDirection: function(id, definedDirection, currentStepId, noOfSteps, isFallbackMode, reverseWhenNavigatingBackwardsOption, cycleOption) {
-
+      getDirection: function (
+        id,
+        definedDirection,
+        currentStepId,
+        noOfSteps,
+        isFallbackMode,
+        reverseWhenNavigatingBackwardsOption,
+        cycleOption
+      ) {
         var animation = this,
-            direction = 1;
+          direction = 1;
 
         if (definedDirection !== undefined) {
           direction = definedDirection;
-        } else if (reverseWhenNavigatingBackwardsOption === true || isFallbackMode === true) {
-
-          if (cycleOption === true && (id === 1 && currentStepId === noOfSteps)) {
+        } else if (
+          reverseWhenNavigatingBackwardsOption === true ||
+          isFallbackMode === true
+        ) {
+          if (cycleOption === true && id === 1 && currentStepId === noOfSteps) {
             // If the cycle option is enabled, and the user is navigating from
             // the last step to the first, navigate forwards
             direction = 1;
           } else {
-            direction = (id < currentStepId) ? -1: 1;
+            direction = id < currentStepId ? -1 : 1;
           }
         } else {
           direction = 1;
@@ -2042,10 +2273,9 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Object} propertySupport - List of properties and whether the
        * browser supports them
        */
-      requiresFallbackMode: function(propertySupport) {
-
+      requiresFallbackMode: function (propertySupport) {
         var transitions = propertySupport.transitions,
-            isFallbackMode = false;
+          isFallbackMode = false;
 
         if (transitions === false) {
           isFallbackMode = true;
@@ -2063,10 +2293,9 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Object} properties - The properties to be used (on the canvas)
        * @returns {Object} The list of properties we've tested and their support
        */
-      getPropertySupport: function(properties) {
-
+      getPropertySupport: function (properties) {
         var transitions = false,
-            animations = false;
+          animations = false;
 
         // Are transitions supported?
         if (Modernizr.csstransitions === true) {
@@ -2080,9 +2309,9 @@ function defineSequence(imagesLoaded, Hammer) {
 
         return {
           transitions: transitions,
-          animations: animations
+          animations: animations,
         };
-      }
+      },
     };
 
     /**
@@ -2090,7 +2319,6 @@ function defineSequence(imagesLoaded, Hammer) {
      * CSS transitions
      */
     self.animationFallback = {
-
       /**
        * Animate an element using JavaScript
        *
@@ -2103,22 +2331,19 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Function} callback - A function to execute once the animation
        * has finished
        */
-      animate: function(element, style, unit, from, to, time, callback) {
-
+      animate: function (element, style, unit, from, to, time, callback) {
         if (element === false) {
           return;
         }
 
         var start = new Date().getTime();
 
-        var timer = setInterval(function() {
+        var timer = setInterval(function () {
+          var step = Math.min(1, (new Date().getTime() - start) / time);
 
-          var step = Math.min(1, (new Date().getTime()-start) / time);
-
-          element.style[style] = (from + step * (to - from)) + unit;
+          element.style[style] = from + step * (to - from) + unit;
 
           if (step === 1) {
-
             if (callback !== undefined) {
               callback();
             }
@@ -2135,14 +2360,10 @@ function defineSequence(imagesLoaded, Hammer) {
        *
        * @param {Number} id - The first Id that Sequence will go to
        */
-      setupCanvas: function(id) {
-
-        var i,
-            step,
-            stepId;
+      setupCanvas: function (id) {
+        var i, step, stepId;
 
         if (self.isFallbackMode === true) {
-
           // Add the "seq-fallback" class to the Sequence element
           addClass(self.$container, "seq-fallback");
 
@@ -2157,13 +2378,11 @@ function defineSequence(imagesLoaded, Hammer) {
           self.$canvas.style.width = "100%";
           self.$canvas.style.height = "100%";
 
-
           // Get the width of the canvas
           this.canvasWidth = self.$canvas.offsetWidth;
 
           // Make each step 100% width/height
           for (i = 0; i < self.noOfSteps; i++) {
-
             // Get the step and its ID (one-based)
             step = self.$steps[i];
             stepId = i + 1;
@@ -2196,28 +2415,44 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Number} direction - The direction to animate in
        * @param {Boolean} animate - Show the canvas animate or snap?
        */
-      moveCanvas: function(nextStepElement, currentStepElement, direction, animate) {
-
+      moveCanvas: function (
+        nextStepElement,
+        currentStepElement,
+        direction,
+        animate
+      ) {
         // Animate steps
         if (animate === true) {
-
           var currentFrom = 0,
-              currentTo = -100,
-              nextFrom = 100,
-              nextTo = 0;
+            currentTo = -100,
+            nextFrom = 100,
+            nextTo = 0;
 
           if (direction === -1) {
             currentTo = 100;
             nextFrom = -100;
           }
 
-          this.animate(currentStepElement, "left", "%", currentFrom, currentTo, self.options.fallback.speed);
-          this.animate(nextStepElement, "left", "%", nextFrom, nextTo, self.options.fallback.speed);
+          this.animate(
+            currentStepElement,
+            "left",
+            "%",
+            currentFrom,
+            currentTo,
+            self.options.fallback.speed
+          );
+          this.animate(
+            nextStepElement,
+            "left",
+            "%",
+            nextFrom,
+            nextTo,
+            self.options.fallback.speed
+          );
         }
 
         // Snap steps into place
         else {
-
           currentStepElement.style.left = "-100%";
           nextStepElement.style.left = "0";
         }
@@ -2234,8 +2469,15 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Number} direction - The direction of navigation
        * @param {Boolean} hashTagNav - If navigation is triggered by the hashTag
        */
-      goTo: function(id, currentStep, currentStepElement, nextStep, nextStepElement, direction, hashTagNav) {
-
+      goTo: function (
+        id,
+        currentStep,
+        currentStepElement,
+        nextStep,
+        nextStepElement,
+        direction,
+        hashTagNav
+      ) {
         var from;
 
         // The next ID is now the current ID
@@ -2252,7 +2494,6 @@ function defineSequence(imagesLoaded, Hammer) {
         // When should the "seq-in" phase start and how long until the step
         // completely finishes animating?
         if (self.firstRun === false) {
-
           this.moveCanvas(nextStepElement, currentStepElement, direction, true);
 
           // Sequence is now animating
@@ -2262,30 +2503,32 @@ function defineSequence(imagesLoaded, Hammer) {
           self.animationStarted(self.currentStepId, self);
 
           // Wait for the step (both phases) to finish animating
-          self.stepEndedTimer = setTimeout(function() {
-
+          self.stepEndedTimer = setTimeout(function () {
             self.animation.stepEnded(self.currentStepId);
           }, self.options.fallback.speed);
         }
 
         // This is the first step we're going to
         else {
-
-          this.moveCanvas(nextStepElement, currentStepElement, direction, false);
+          this.moveCanvas(
+            nextStepElement,
+            currentStepElement,
+            direction,
+            false
+          );
           self.firstRun = false;
 
           if (self.options.autoPlay === true) {
             self.autoPlay.start(true);
           }
         }
-      }
+      },
     };
 
     /**
      * Manage pagination
      */
     self.pagination = {
-
       /**
        * Get the links from each pagination element (any top level elements)
        *
@@ -2295,17 +2538,15 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Number} i - The number of the pagination element
        * @returns {Array} paginationLinks - Each link in an array
        */
-      getLinks: function(element, rel) {
-
+      getLinks: function (element, rel) {
         var childElement,
-            childElements = element.childNodes,
-            childElementsLength = childElements.length,
-            paginationLinks = [],
-            i;
+          childElements = element.childNodes,
+          childElementsLength = childElements.length,
+          paginationLinks = [],
+          i;
 
         // Get each top level pagination link and add it to the array
         for (i = 0; i < childElementsLength; i++) {
-
           childElement = childElements[i];
 
           if (childElement.nodeType === 1) {
@@ -2321,25 +2562,21 @@ function defineSequence(imagesLoaded, Hammer) {
        *
        * @returns {Array} - the pagination element(s) that are currently active
        */
-      update: function() {
-
-        if(self.$pagination.elements !== undefined) {
-
+      update: function () {
+        if (self.$pagination.elements !== undefined) {
           var i,
-              j,
-              id = self.currentStepId - 1,
-              currentPaginationLink,
-              currentPaginationLinksLength,
-              paginationLength = self.$pagination.elements.length;
+            j,
+            id = self.currentStepId - 1,
+            currentPaginationLink,
+            currentPaginationLinksLength,
+            paginationLength = self.$pagination.elements.length;
 
           // Remove the "seq-current" class from a previous pagination link
           // if there is one
           if (self.$pagination.currentLinks !== undefined) {
-
             currentPaginationLinksLength = self.$pagination.currentLinks.length;
 
             for (i = 0; i < currentPaginationLinksLength; i++) {
-
               currentPaginationLink = self.$pagination.currentLinks[i];
               removeClass(currentPaginationLink, "seq-current");
             }
@@ -2352,7 +2589,6 @@ function defineSequence(imagesLoaded, Hammer) {
           // add the "seq-current" class to them, then save them for later
           // for when they need to have the "seq-current" class removed
           for (j = 0; j < paginationLength; j++) {
-
             currentPaginationLink = self.$pagination.links[j][id];
             self.$pagination.currentLinks.push(currentPaginationLink);
 
@@ -2361,14 +2597,13 @@ function defineSequence(imagesLoaded, Hammer) {
         }
 
         return self.$pagination.currentLinks;
-      }
+      },
     };
 
     /**
      * Manage Sequence hashTag support
      */
     self.hashTags = {
-
       /**
        * Set up hashTags
        *
@@ -2377,12 +2612,9 @@ function defineSequence(imagesLoaded, Hammer) {
        * override this if an entering URL contains a hashTag that corresponds
        * to a step)
        */
-      init: function(id) {
-
+      init: function (id) {
         if (self.options.hashTags === true) {
-
-          var correspondingStepId,
-              newHashTag;
+          var correspondingStepId, newHashTag;
 
           // Does the browser support pushstate?
           self.hasPushstate = !!(window.history && history.pushState);
@@ -2395,10 +2627,11 @@ function defineSequence(imagesLoaded, Hammer) {
 
           // If there is a hashTag but no value, don't go any further
           if (newHashTag !== "") {
-
             // Get the current hashTag's step ID's
             self.currentHashTag = newHashTag;
-            correspondingStepId = this.hasCorrespondingStep(self.currentHashTag);
+            correspondingStepId = this.hasCorrespondingStep(
+              self.currentHashTag
+            );
 
             // If the entering URL contains a hashTag, and the hashTag relates to
             // a corresponding step, the step's ID will override the startStepId
@@ -2420,10 +2653,9 @@ function defineSequence(imagesLoaded, Hammer) {
        *
        * @returns {Number} correspondingStep - The step ID relating to the hashTag or -1 meaning there is no correspondingStep
        */
-      hasCorrespondingStep: function(hashTag) {
-
+      hasCorrespondingStep: function (hashTag) {
         var correspondingStep = -1,
-            correspondingStepId = self.stepHashTags.indexOf(hashTag);
+          correspondingStepId = self.stepHashTags.indexOf(hashTag);
 
         if (correspondingStepId > -1) {
           correspondingStep = correspondingStepId;
@@ -2437,16 +2669,17 @@ function defineSequence(imagesLoaded, Hammer) {
        *
        * @returns {Array} stepHashTags - An array of hashTags
        */
-      getStepHashTags: function() {
-
+      getStepHashTags: function () {
         var i,
-            elementHashTag,
-            stepHashTags = [];
+          elementHashTag,
+          stepHashTags = [];
 
         // Get each steps hashtag
         for (i = 0; i < self.noOfSteps; i++) {
-
-          elementHashTag = (self.options.hashDataAttribute === false) ? self.$steps[i].id: self.$steps[i].getAttribute("data-seq-hashtag");
+          elementHashTag =
+            self.options.hashDataAttribute === false
+              ? self.$steps[i].id
+              : self.$steps[i].getAttribute("data-seq-hashtag");
 
           // Add the hashtag to an array
           stepHashTags.push(elementHashTag);
@@ -2463,10 +2696,13 @@ function defineSequence(imagesLoaded, Hammer) {
        *   change is allowed in the options
        * - the current step has a hashTag
        */
-      update: function() {
-
-        if (self.options.hashTags === true && self.firstRun === false || (self.options.hashTags === true && self.firstRun === true && self.options.hashChangesOnFirstStep === true)) {
-
+      update: function () {
+        if (
+          (self.options.hashTags === true && self.firstRun === false) ||
+          (self.options.hashTags === true &&
+            self.firstRun === true &&
+            self.options.hashChangesOnFirstStep === true)
+        ) {
           // Zero-base the currentStepId
           var hashTagId = self.currentStepId - 1;
 
@@ -2474,12 +2710,10 @@ function defineSequence(imagesLoaded, Hammer) {
           self.currentHashTag = self.stepHashTags[hashTagId];
 
           if (self.currentHashtag !== "") {
-
             // Add the hashTag to the URL
             if (self.hasPushstate === true) {
               history.pushState(null, null, "#!" + self.currentHashTag);
-            }
-            else {
+            } else {
               location.hash = "#!" + self.currentHashTag;
             }
           }
@@ -2490,30 +2724,25 @@ function defineSequence(imagesLoaded, Hammer) {
        * Cross Browser helper for an hashchange event
        * Source: http://stackoverflow.com/questions/9339865/get-the-hashchange-event-to-work-in-all-browsers-including-ie7/
        */
-      setupEvent: function() {
-
-        if ('onhashchange' in window) {
-
+      setupEvent: function () {
+        if ("onhashchange" in window) {
           if (window.addEventListener) {
-
-            window.addHashChange = function(func, before) {
-              window.addEventListener('hashchange', func, before);
+            window.addHashChange = function (func, before) {
+              window.addEventListener("hashchange", func, before);
             };
 
-            window.removeHashChange = function(func) {
-              window.removeEventListener('hashchange', func);
+            window.removeHashChange = function (func) {
+              window.removeEventListener("hashchange", func);
             };
 
             return;
-
           } else if (window.attachEvent) {
-
-            window.addHashChange = function(func) {
-              window.attachEvent('onhashchange', func);
+            window.addHashChange = function (func) {
+              window.attachEvent("onhashchange", func);
             };
 
-            window.removeHashChange = function(func) {
-              window.detachEvent('onhashchange', func);
+            window.removeHashChange = function (func) {
+              window.detachEvent("onhashchange", func);
             };
 
             return;
@@ -2523,49 +2752,61 @@ function defineSequence(imagesLoaded, Hammer) {
         var hashChangeFuncs = [];
         var oldHref = location.href;
 
-        window.addHashChange = function(func, before) {
-          if (typeof func === 'function') {
-            hashChangeFuncs[before?'unshift':'push'](func);
+        window.addHashChange = function (func, before) {
+          if (typeof func === "function") {
+            hashChangeFuncs[before ? "unshift" : "push"](func);
           }
         };
 
-        window.removeHashChange = function(func) {
-          for (var i=hashChangeFuncs.length-1; i>=0; i--) {
+        window.removeHashChange = function (func) {
+          for (var i = hashChangeFuncs.length - 1; i >= 0; i--) {
             if (hashChangeFuncs[i] === func) {
               hashChangeFuncs.splice(i, 1);
             }
           }
         };
 
-        setInterval(function() {
+        setInterval(function () {
           var newHref = location.href;
           if (oldHref !== newHref) {
             var _oldHref = oldHref;
             oldHref = newHref;
-            for (var i=0; i<hashChangeFuncs.length; i++) {
+            for (var i = 0; i < hashChangeFuncs.length; i++) {
               hashChangeFuncs[i].call(window, {
-                'type': 'hashchange',
-                'newURL': newHref,
-                'oldURL': _oldHref
+                type: "hashchange",
+                newURL: newHref,
+                oldURL: _oldHref,
               });
             }
           }
         }, 100);
-      }
+      },
     };
 
     /**
      * Manage Sequence preloading
      */
     self.preload = {
-
       // Sequence's default HTML for the preloader
-      defaultHtml: '<svg width="39" height="16" viewBox="0 0 39 16" xmlns="http://www.w3.org/2000/svg" class="seq-preload-indicator"><title>Sequence.js Preloading Indicator</title><desc>Three orange dots increasing in size from left to right</desc><g fill="#F96D38"><path class="seq-preload-circle seq-preload-circle-1" d="M3.999 12.012c2.209 0 3.999-1.791 3.999-3.999s-1.79-3.999-3.999-3.999-3.999 1.791-3.999 3.999 1.79 3.999 3.999 3.999z"/><path class="seq-preload-circle seq-preload-circle-2" d="M15.996 13.468c3.018 0 5.465-2.447 5.465-5.466 0-3.018-2.447-5.465-5.465-5.465-3.019 0-5.466 2.447-5.466 5.465 0 3.019 2.447 5.466 5.466 5.466z"/><path class="seq-preload-circle seq-preload-circle-3" d="M31.322 15.334c4.049 0 7.332-3.282 7.332-7.332 0-4.049-3.282-7.332-7.332-7.332s-7.332 3.283-7.332 7.332c0 4.05 3.283 7.332 7.332 7.332z"/></g></svg>',
+      defaultHtml:
+        '<svg width="39" height="16" viewBox="0 0 39 16" xmlns="http://www.w3.org/2000/svg" class="seq-preload-indicator"><title>Sequence.js Preloading Indicator</title><desc>Three orange dots increasing in size from left to right</desc><g fill="#F96D38"><path class="seq-preload-circle seq-preload-circle-1" d="M3.999 12.012c2.209 0 3.999-1.791 3.999-3.999s-1.79-3.999-3.999-3.999-3.999 1.791-3.999 3.999 1.79 3.999 3.999 3.999z"/><path class="seq-preload-circle seq-preload-circle-2" d="M15.996 13.468c3.018 0 5.465-2.447 5.465-5.466 0-3.018-2.447-5.465-5.465-5.465-3.019 0-5.466 2.447-5.466 5.465 0 3.019 2.447 5.466 5.466 5.466z"/><path class="seq-preload-circle seq-preload-circle-3" d="M31.322 15.334c4.049 0 7.332-3.282 7.332-7.332 0-4.049-3.282-7.332-7.332-7.332s-7.332 3.283-7.332 7.332c0 4.05 3.283 7.332 7.332 7.332z"/></g></svg>',
 
-      fallbackHtml: '<div class="seq-preload-indicator seq-preload-indicator-fallback"><div class="seq-preload-circle seq-preload-circle-1"></div><div class="seq-preload-circle seq-preload-circle-2"></div><div class="seq-preload-circle seq-preload-circle-3"></div></div>',
+      fallbackHtml:
+        '<div class="seq-preload-indicator seq-preload-indicator-fallback"><div class="seq-preload-circle seq-preload-circle-1"></div><div class="seq-preload-circle seq-preload-circle-2"></div><div class="seq-preload-circle seq-preload-circle-3"></div></div>',
 
       // Sequence's default preloader styles and animation for the preloader
-       defaultStyles: '@'+prefixTranslations.animation[Modernizr.prefixed("animation")]+'keyframes seq-preloader {50% {opacity: 1;}100% {opacity: 0;}}.seq-preloader {background: white;visibility: visible;opacity: 1;position: absolute;z-index: 9999;height: 100%;width: 100%;top: 0;left: 0;right: 0;bottom: 0;} .seq-preloader.seq-preloaded {opacity: 0;visibility: hidden;'+Modernizr.prefixed("transition")+': visibility 0s .5s, opacity .5s;}.seq-preload-indicator {overflow: visible;position: relative;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);}.seq-preload-circle {display: inline-block;height: 12px;width: 12px;fill: #F96D38;opacity: 0;'+prefixTranslations.animation[Modernizr.prefixed("animation")]+'animation: seq-preloader 1.25s infinite;}.seq-preload-circle-2 {'+prefixTranslations.animation[Modernizr.prefixed("animation")]+'animation-delay: .15s;}.seq-preload-circle-3 {'+prefixTranslations.animation[Modernizr.prefixed("animation")]+'animation-delay: .3s;}.seq-preload-indicator-fallback{width: 42px;margin-left: -21px;overflow: visible;}.seq-preload-indicator-fallback .seq-preload-circle {width: 8px; height:8px;background-color: #F96D38;border-radius: 100%; opacity: 1;display: inline-block; vertical-align: middle;}.seq-preload-indicator-fallback .seq-preload-circle-2{margin-left: 3px; margin-right: 3px; width: 12px; height: 12px;}.seq-preload-indicator-fallback .seq-preload-circle-3{width: 16px; height: 16px;}',
+      defaultStyles:
+        "@" +
+        prefixTranslations.animation[Modernizr.prefixed("animation")] +
+        "keyframes seq-preloader {50% {opacity: 1;}100% {opacity: 0;}}.seq-preloader {background: white;visibility: visible;opacity: 1;position: absolute;z-index: 9999;height: 100%;width: 100%;top: 0;left: 0;right: 0;bottom: 0;} .seq-preloader.seq-preloaded {opacity: 0;visibility: hidden;" +
+        Modernizr.prefixed("transition") +
+        ": visibility 0s .5s, opacity .5s;}.seq-preload-indicator {overflow: visible;position: relative;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);}.seq-preload-circle {display: inline-block;height: 12px;width: 12px;fill: #F96D38;opacity: 0;" +
+        prefixTranslations.animation[Modernizr.prefixed("animation")] +
+        "animation: seq-preloader 1.25s infinite;}.seq-preload-circle-2 {" +
+        prefixTranslations.animation[Modernizr.prefixed("animation")] +
+        "animation-delay: .15s;}.seq-preload-circle-3 {" +
+        prefixTranslations.animation[Modernizr.prefixed("animation")] +
+        "animation-delay: .3s;}.seq-preload-indicator-fallback{width: 42px;margin-left: -21px;overflow: visible;}.seq-preload-indicator-fallback .seq-preload-circle {width: 8px; height:8px;background-color: #F96D38;border-radius: 100%; opacity: 1;display: inline-block; vertical-align: middle;}.seq-preload-indicator-fallback .seq-preload-circle-2{margin-left: 3px; margin-right: 3px; width: 12px; height: 12px;}.seq-preload-indicator-fallback .seq-preload-circle-3{width: 16px; height: 16px;}",
 
       /**
        * Setup Sequence preloading
@@ -2573,23 +2814,24 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Function} callback - Function to execute when preloading has finished
        * @returns {Boolean} Whether preload was initiated
        */
-      init: function(callback) {
-
+      init: function (callback) {
         if (self.options.preloader !== false) {
-
           var preload = this,
-              stepImagesToPreload,
-              individualImagesToPreload,
-              imagesToPreload,
-              imgLoad,
-              progress,
-              result;
+            stepImagesToPreload,
+            individualImagesToPreload,
+            imagesToPreload,
+            imgLoad,
+            progress,
+            result;
 
           // Add a class of "seq-preloading" to the Sequence element
           addClass(self.$container, "seq-preloading");
 
           // Get the preloader
-          self.$preloader = self.ui.getElements("preloader", self.options.preloader);
+          self.$preloader = self.ui.getElements(
+            "preloader",
+            self.options.preloader
+          );
 
           // Add the preloader element if necessary
           preload.append();
@@ -2602,31 +2844,43 @@ function defineSequence(imagesLoaded, Hammer) {
 
           // Get images from particular Sequence steps to be preloaded
           // Get images with specific source values to be preloaded
-          stepImagesToPreload = preload.getImagesToPreload(self.options.preloadTheseSteps);
-          individualImagesToPreload = preload.getImagesToPreload(self.options.preloadTheseImages, true);
+          stepImagesToPreload = preload.getImagesToPreload(
+            self.options.preloadTheseSteps
+          );
+          individualImagesToPreload = preload.getImagesToPreload(
+            self.options.preloadTheseImages,
+            true
+          );
 
           // Combine step images and individual images
-          imagesToPreload = stepImagesToPreload.concat(individualImagesToPreload);
+          imagesToPreload = stepImagesToPreload.concat(
+            individualImagesToPreload
+          );
 
           // Initiate the imagesLoaded plugin
           imgLoad = imagesLoaded(imagesToPreload);
 
           // When imagesLoaded() has finished (regardless of whether images
           // completed or failed to load)
-          imgLoad.on("always", function(instance) {
+          imgLoad.on("always", function (instance) {
             preload.complete(callback);
           });
 
           // Track the number of images that have loaded so far
           progress = 1;
 
-          imgLoad.on("progress", function(instance, image) {
-
+          imgLoad.on("progress", function (instance, image) {
             // Has the image loaded or is it broken?
-            result = image.isLoaded ? 'loaded': 'broken';
+            result = image.isLoaded ? "loaded" : "broken";
 
             // Callback
-            self.preloadProgress(result, image.img.src, progress++, imagesToPreload.length, self);
+            self.preloadProgress(
+              result,
+              image.img.src,
+              progress++,
+              imagesToPreload.length,
+              self
+            );
           });
 
           return true;
@@ -2640,8 +2894,7 @@ function defineSequence(imagesLoaded, Hammer) {
        *
        * @param {Function} callback - Function to execute when preloading has finished
        */
-      complete: function(callback) {
-
+      complete: function (callback) {
         // Callback
         self.preloaded(self);
 
@@ -2664,7 +2917,10 @@ function defineSequence(imagesLoaded, Hammer) {
         }
 
         // Remove the fallback preloader
-        if (Modernizr.prefixed("animation") === false || Modernizr.svg === false) {
+        if (
+          Modernizr.prefixed("animation") === false ||
+          Modernizr.svg === false
+        ) {
           self.$preloader[0].style.display = "none";
         }
 
@@ -2676,35 +2932,37 @@ function defineSequence(imagesLoaded, Hammer) {
       /**
        * Add the preloader's styles to the <head></head>
        */
-      addStyles: function() {
-
+      addStyles: function () {
         if (self.options.preloader === true) {
-
           // Get the <head> and create the <style> element
-          var head = document.head || document.getElementsByTagName('head')[0];
-          this.styleElement = document.createElement('style');
+          var head = document.head || document.getElementsByTagName("head")[0];
+          this.styleElement = document.createElement("style");
 
           // Add the default styles to the <style> element
-          this.styleElement.type = 'text/css';
+          this.styleElement.type = "text/css";
           if (this.styleElement.styleSheet) {
             this.styleElement.styleSheet.cssText = this.defaultStyles;
           } else {
-            this.styleElement.appendChild(document.createTextNode(this.defaultStyles));
+            this.styleElement.appendChild(
+              document.createTextNode(this.defaultStyles)
+            );
           }
 
           // Add the <style> element to the <head>
           head.appendChild(this.styleElement);
 
           // Animate the preloader using JavaScript if the browser doesn't support SVG
-          if (Modernizr.prefixed("animation") === false || Modernizr.svg === false) {
-
+          if (
+            Modernizr.prefixed("animation") === false ||
+            Modernizr.svg === false
+          ) {
             // Get the preload indicator
             var preloadIndicator = self.$preloader[0].firstChild;
 
-            var indicatorFlash = function() {
+            var indicatorFlash = function () {
               preloadIndicator.style.visibility = "hidden";
               preloadFlashTime = 1000;
-              setTimeout(function() {
+              setTimeout(function () {
                 preloadIndicator.style.visibility = "visible";
               }, 500);
             };
@@ -2712,7 +2970,7 @@ function defineSequence(imagesLoaded, Hammer) {
             indicatorFlash();
 
             // Make the preload indicator flash
-            this.preloadIndicatorTimer = setInterval(function() {
+            this.preloadIndicatorTimer = setInterval(function () {
               indicatorFlash();
             }, 1000);
           }
@@ -2726,8 +2984,7 @@ function defineSequence(imagesLoaded, Hammer) {
       /**
        * Remove the preloader's styles from the <head></head>
        */
-      removeStyles: function() {
-
+      removeStyles: function () {
         this.styleElement.parentNode.removeChild(this.styleElement);
       },
 
@@ -2739,29 +2996,25 @@ function defineSequence(imagesLoaded, Hammer) {
        * @param {Boolean} srcOnly - Is the element to be retrieved via the src?
        * @returns {Array} imagesToPreload - The images to preload in an array
        */
-      getImagesToPreload: function(elements, srcOnly) {
-
+      getImagesToPreload: function (elements, srcOnly) {
         // Where we'll save the images
         var imagesToPreload = [];
 
         if (isArray(elements) === true) {
-
           var i,
-              j,
-              elementLength = elements.length,
-              step,
-              imagesInStep,
-              imagesInStepLength,
-              image,
-              img,
-              src;
+            j,
+            elementLength = elements.length,
+            step,
+            imagesInStep,
+            imagesInStepLength,
+            image,
+            img,
+            src;
 
           // Get each step's <img> elements and add them to imagesToPreload
           if (srcOnly !== true) {
-
             // Get each step
             for (i = 0; i < elementLength; i++) {
-
               // Get the step and any images belonging to it
               step = self.$steps[i];
               imagesInStep = step.getElementsByTagName("img");
@@ -2769,7 +3022,6 @@ function defineSequence(imagesLoaded, Hammer) {
 
               // Get each image within the step
               for (j = 0; j < imagesInStepLength; j++) {
-
                 image = imagesInStep[j];
                 imagesToPreload.push(image);
               }
@@ -2778,7 +3030,6 @@ function defineSequence(imagesLoaded, Hammer) {
 
           // Get each step's <img> elements via the src and add them to imagesToPreload
           else {
-
             img = [];
 
             for (i = 0; i < elementLength; i++) {
@@ -2800,10 +3051,8 @@ function defineSequence(imagesLoaded, Hammer) {
        *
        * @returns {Boolean} whether the default preloader was appended or not
        */
-      append: function() {
-
+      append: function () {
         if (self.options.preloader === true) {
-
           // Set up the preloader container
           self.$preloader = document.createElement("div");
           self.$preloader.className = "seq-preloader";
@@ -2812,7 +3061,10 @@ function defineSequence(imagesLoaded, Hammer) {
           self.$preloader = [self.$preloader];
 
           // Use the fallback preloader if CSS keyframes or SVG aren't supported
-          if (Modernizr.prefixed("animation") !== false && Modernizr.svg === true) {
+          if (
+            Modernizr.prefixed("animation") !== false &&
+            Modernizr.svg === true
+          ) {
             self.$preloader[0].innerHTML = self.preload.defaultHtml;
           } else {
             self.$preloader[0].innerHTML = self.preload.fallbackHtml;
@@ -2832,12 +3084,9 @@ function defineSequence(imagesLoaded, Hammer) {
        *
        * @param {String} type - "show" or "hide"
        */
-      toggleStepsVisibility: function(type) {
-
+      toggleStepsVisibility: function (type) {
         if (self.options.hideStepsUntilPreloaded === true) {
-
-          var i,
-              step;
+          var i, step;
 
           // Hide or show each step
           for (i = 0; i < self.noOfSteps; i++) {
@@ -2845,42 +3094,39 @@ function defineSequence(imagesLoaded, Hammer) {
 
             if (type === "hide") {
               self.ui.hide(step, 0);
-            }else {
+            } else {
               self.ui.show(step, 0);
             }
-
           }
 
           return true;
         }
 
         return false;
-      }
+      },
     };
 
     /**
      * Add and remove Sequence events
      */
     self.manageEvents = {
-
       // Keep track of the added events here
       list: {
-        "load": [],
-        "click": [],
-        "touchstart": [],
-        "mousemove": [],
-        "mouseleave": [],
-        "hammer": [],
-        "keyup": [],
-        "hashchange": [],
-        "resize": []
+        load: [],
+        click: [],
+        touchstart: [],
+        mousemove: [],
+        mouseleave: [],
+        hammer: [],
+        keyup: [],
+        hashchange: [],
+        resize: [],
       },
 
       /**
        * Set up events on init
        */
-      init: function() {
-
+      init: function () {
         // Add visibilityChange to the list of events
         self.manageEvents.list[visibilityChange] = [];
 
@@ -2906,19 +3152,28 @@ function defineSequence(imagesLoaded, Hammer) {
 
         // If being used, get the next button(s) and set up the events
         if (self.options.nextButton !== false) {
-          self.$next = self.ui.getElements("nextButton", self.options.nextButton);
+          self.$next = self.ui.getElements(
+            "nextButton",
+            self.options.nextButton
+          );
           this.add.button(self.$next, "nav", self.next);
         }
 
         // If being used, get the next button(s) and set up the events
         if (self.options.prevButton !== false) {
-          self.$prev = self.ui.getElements("prevButton", self.options.prevButton);
+          self.$prev = self.ui.getElements(
+            "prevButton",
+            self.options.prevButton
+          );
           this.add.button(self.$prev, "nav", self.prev);
         }
 
         // If being used, get the autoPlay button(s) and set up the events
         if (self.options.autoPlayButton !== false) {
-          self.$autoPlay = self.ui.getElements("autoPlayButton", self.options.autoPlayButton);
+          self.$autoPlay = self.ui.getElements(
+            "autoPlayButton",
+            self.options.autoPlayButton
+          );
           this.add.button(self.$autoPlay, "nav", self.toggleAutoPlay);
         }
 
@@ -2927,14 +3182,16 @@ function defineSequence(imagesLoaded, Hammer) {
 
         // If being used, get the pagination element(s) and set up the events
         if (self.options.pagination !== false) {
-
           self.$pagination = {};
 
           // The Sequence element and the links that will control it
           self.$pagination.relatedElementId = instance;
           self.$pagination.links = [];
 
-          self.$pagination.elements = self.ui.getElements("pagination", self.options.pagination);
+          self.$pagination.elements = self.ui.getElements(
+            "pagination",
+            self.options.pagination
+          );
 
           this.add.button(self.$pagination.elements, "pagination");
         }
@@ -2945,15 +3202,12 @@ function defineSequence(imagesLoaded, Hammer) {
       /**
        * Remove all events at once
        */
-      removeAll: function(eventList) {
-
-        var eventType,
-            theEvents;
+      removeAll: function (eventList) {
+        var eventType, theEvents;
 
         // Remove each event
         for (eventType in eventList) {
           if (eventList.hasOwnProperty(eventType) === true) {
-
             theEvents = eventList[eventType];
 
             this.remove(eventType);
@@ -2968,56 +3222,54 @@ function defineSequence(imagesLoaded, Hammer) {
        *
        * @param {String} type - The type of event to remove eg. "click"
        */
-      remove: function(type) {
-
+      remove: function (type) {
         // Get the elements using the event and count them
         var eventElements = self.manageEvents.list[type];
         var eventElementsLength = eventElements.length;
 
-        switch(type) {
-
+        switch (type) {
           case "hashchange":
             if (self.options.hashTags === true) {
               removeHashChange(eventElements[0].handler);
             }
-          break;
+            break;
 
           case "hammer":
-
-            if (self.manageEvents.list.hammer.length > 0 && document.querySelectorAll !== undefined) {
-
+            if (
+              self.manageEvents.list.hammer.length > 0 &&
+              document.querySelectorAll !== undefined
+            ) {
               var handler = self.manageEvents.list.hammer[0].handler;
               self.hammerTime.off("swipe", [handler]);
             }
-          break;
+            break;
 
           default:
-
             // Remove the event from each element
             for (var i = 0; i < eventElementsLength; i++) {
               var eventProperties = eventElements[i];
 
-              removeEvent(eventProperties.element, type, eventProperties.handler);
+              removeEvent(
+                eventProperties.element,
+                type,
+                eventProperties.handler
+              );
             }
         }
       },
 
       add: {
-
         /**
          * Add the hashchange event
          *
          * @returns {Array} Containing an object with the element and handler
          */
-        hashChange: function() {
-
+        hashChange: function () {
           // Setup the cross-browser hashchange event
           self.hashTags.setupEvent();
 
-          var handler = function(e) {
-
-            var newHashTag,
-                id;
+          var handler = function (e) {
+            var newHashTag, id;
 
             // Get the hashTag from the URL
             newHashTag = e.newURL || location.href;
@@ -3025,7 +3277,6 @@ function defineSequence(imagesLoaded, Hammer) {
 
             // Go to the new step if we're not already on it
             if (self.currentHashTag !== newHashTag) {
-
               // Get the ID of the new hash tag and one-base it
               id = self.stepHashTags.indexOf(newHashTag) + 1;
 
@@ -3047,7 +3298,10 @@ function defineSequence(imagesLoaded, Hammer) {
 
           addHashChange(handler);
 
-          self.manageEvents.list.hashchange.push({"element": window, "handler": handler});
+          self.manageEvents.list.hashchange.push({
+            element: window,
+            handler: handler,
+          });
 
           return self.manageEvents.list.hashchange;
         },
@@ -3060,28 +3314,23 @@ function defineSequence(imagesLoaded, Hammer) {
          * @param {Function} callback - Function to execute when the button is clicked
          * @returns {Array} Containing an object with the element and handler
          */
-        button: function(elements, type, callback) {
-
+        button: function (elements, type, callback) {
           // Count the number of elements being added
           var elementsLength = elements.length,
-              handler,
-              element,
-              targetElement,
-              buttonEvent,
-              parent,
-              rel,
-              id,
-              i;
+            handler,
+            element,
+            targetElement,
+            buttonEvent,
+            parent,
+            rel,
+            id,
+            i;
 
           switch (type) {
-
             // Set up a click event for navigation elements
             case "nav":
-
-              buttonEvent = function(element) {
-
-                handler = addEvent(element, "click", function(event) {
-
+              buttonEvent = function (element) {
+                handler = addEvent(element, "click", function (event) {
                   if (!event) {
                     event = window.event;
                   }
@@ -3102,11 +3351,8 @@ function defineSequence(imagesLoaded, Hammer) {
 
             // Set up a click event for pagination
             case "pagination":
-
-              buttonEvent = function(element, rel) {
-
-                handler = addEvent(element, "click", function(event, element) {
-
+              buttonEvent = function (element, rel) {
+                handler = addEvent(element, "click", function (event, element) {
                   if (!event) {
                     event = window.event;
                   }
@@ -3132,7 +3378,9 @@ function defineSequence(imagesLoaded, Hammer) {
                 });
 
                 // Save the pagination links
-                self.$pagination.links.push(self.pagination.getLinks(element, rel));
+                self.$pagination.links.push(
+                  self.pagination.getLinks(element, rel)
+                );
               };
               break;
           }
@@ -3146,21 +3394,28 @@ function defineSequence(imagesLoaded, Hammer) {
 
             // The button controls one Sequence instance
             // (defined via the rel attribute)
-            if (rel === self.$container.id && element.getAttribute("data-seq-button") === null) {
-
+            if (
+              rel === self.$container.id &&
+              element.getAttribute("data-seq-button") === null
+            ) {
               element.setAttribute("data-seq-button", true);
               buttonEvent(element, rel);
             }
 
             // The button controls all Sequence instances
-            else if (rel === null && element.getAttribute("data-seq-button") === null) {
-
+            else if (
+              rel === null &&
+              element.getAttribute("data-seq-button") === null
+            ) {
               buttonEvent(element, rel);
             }
 
             // Save the element and its handler for later, should it need to
             // be removed
-            self.manageEvents.list.click.push({"element": element, "handler": handler});
+            self.manageEvents.list.click.push({
+              element: element,
+              handler: handler,
+            });
           }
 
           return self.manageEvents.list.click;
@@ -3175,11 +3430,10 @@ function defineSequence(imagesLoaded, Hammer) {
          * its children. Child elements overflowing the Sequence element will
          * not cause Sequence to be stopped.
          */
-        stopOnHover: function() {
-
+        stopOnHover: function () {
           var previouslyInside = false,
-              touchHandler,
-              handler;
+            touchHandler,
+            handler;
 
           self.isMouseOver = false;
 
@@ -3187,20 +3441,21 @@ function defineSequence(imagesLoaded, Hammer) {
            * Determine when the user touches the container. This is so we can
            * disable the use of stopOnHover for touches, but not for mousemove
            */
-          touchHandler = addEvent(self.$container, "touchstart", function(e) {
-
+          touchHandler = addEvent(self.$container, "touchstart", function (e) {
             self.isTouched = true;
           });
 
           // Save the event
-          self.manageEvents.list.touchstart.push({"element": self.$container, "handler": touchHandler});
+          self.manageEvents.list.touchstart.push({
+            element: self.$container,
+            handler: touchHandler,
+          });
 
           /**
            * Stop autoPlay only when the cursor is inside the boundaries of the
            * Sequence element
            */
-          handler = addEvent(self.$container, "mousemove", function(e) {
-
+          handler = addEvent(self.$container, "mousemove", function (e) {
             e = e || window.event;
 
             // If the user touched the container, don't stop - stopOnHover
@@ -3212,9 +3467,11 @@ function defineSequence(imagesLoaded, Hammer) {
 
             // Is the cursor inside the Sequence element?
             if (insideElement(self.$container, e) === true) {
-
               // Pause if the cursor was previously outside the Sequence element
-              if (self.options.autoPlayPauseOnHover === true && self.isMouseOver === false) {
+              if (
+                self.options.autoPlayPauseOnHover === true &&
+                self.isMouseOver === false
+              ) {
                 self.autoPlay.pause();
               }
 
@@ -3225,9 +3482,11 @@ function defineSequence(imagesLoaded, Hammer) {
             // The cursor is outside of the main container, but over child
             // elements belonging to the container
             else {
-
               // Unpause if the cursor was previously inside the Sequence element
-              if (self.options.autoPlayPauseOnHover === true && self.isMouseOver === true) {
+              if (
+                self.options.autoPlayPauseOnHover === true &&
+                self.isMouseOver === true
+              ) {
                 self.autoPlay.unpause();
               }
 
@@ -3237,13 +3496,15 @@ function defineSequence(imagesLoaded, Hammer) {
           });
 
           // Save the event
-          self.manageEvents.list.mousemove.push({"element": self.$container, "handler": handler});
+          self.manageEvents.list.mousemove.push({
+            element: self.$container,
+            handler: handler,
+          });
 
           /**
            * Start autoPlay when the cursor leaves the Sequence element
            */
-          handler = addEvent(self.$container, "mouseleave", function(e) {
-
+          handler = addEvent(self.$container, "mouseleave", function (e) {
             if (self.options.autoPlayPauseOnHover === true) {
               self.autoPlay.unpause();
             }
@@ -3253,7 +3514,10 @@ function defineSequence(imagesLoaded, Hammer) {
           });
 
           // Save the event
-          self.manageEvents.list.mouseleave.push({"element": self.$container, "handler": handler});
+          self.manageEvents.list.mouseleave.push({
+            element: self.$container,
+            handler: handler,
+          });
 
           return null;
         },
@@ -3261,8 +3525,7 @@ function defineSequence(imagesLoaded, Hammer) {
         /**
          * Navigate to a step when Sequence is swiped
          */
-        swipeNavigation: function() {
-
+        swipeNavigation: function () {
           // Don't use swipe navigation if the browser doesn't support
           // addEventListener (Hammer.js needs it)
           if (window.addEventListener === undefined) {
@@ -3270,34 +3533,30 @@ function defineSequence(imagesLoaded, Hammer) {
             return;
           }
 
-          var hammerDirection,
-              handler;
+          var hammerDirection, handler;
 
           if (typeof Hammer === "function") {
-
-            handler = function(e) {
-
-              switch(e.direction) {
-
+            handler = function (e) {
+              switch (e.direction) {
                 // Left
                 case 2:
                   self.options.swipeEvents.left(self);
-                break;
+                  break;
 
                 // Right
                 case 4:
                   self.options.swipeEvents.right(self);
-                break;
+                  break;
 
                 // Up
                 case 8:
                   self.options.swipeEvents.up(self);
-                break;
+                  break;
 
                 // Down
                 case 16:
                   self.options.swipeEvents.down(self);
-                break;
+                  break;
               }
             };
 
@@ -3310,19 +3569,20 @@ function defineSequence(imagesLoaded, Hammer) {
             // determine the Hammer direction that needs to be set based on the
             // swipe directions being used (hammerjs.github.io/api/#directions)
             hammerDirection = getHammerDirection(self.options.swipeEvents);
-            self.hammerTime.get("swipe").set({direction: hammerDirection});
+            self.hammerTime.get("swipe").set({ direction: hammerDirection });
 
-            self.manageEvents.list.hammer.push({"element": self.$container, "handler": handler});
+            self.manageEvents.list.hammer.push({
+              element: self.$container,
+              handler: handler,
+            });
           }
         },
 
         /**
          * Navigate to a step when corresponding keys are pressed
          */
-        keyNavigation: function() {
-
-          var handler = addEvent(document, "keyup", function(event) {
-
+        keyNavigation: function () {
+          var handler = addEvent(document, "keyup", function (event) {
             if (!event) {
               event = window.event;
             }
@@ -3331,37 +3591,42 @@ function defineSequence(imagesLoaded, Hammer) {
             var keyCodeChar = parseInt(String.fromCharCode(event.keyCode));
 
             // Go to the numeric key pressed
-            if ((keyCodeChar > 0 && keyCodeChar <= self.noOfSteps) && (self.options.numericKeysGoToSteps)) {
+            if (
+              keyCodeChar > 0 &&
+              keyCodeChar <= self.noOfSteps &&
+              self.options.numericKeysGoToSteps
+            ) {
               self.goTo(keyCodeChar);
             }
 
             // When left/right arrow keys are pressed, go to prev/next steps
-            switch(event.keyCode) {
+            switch (event.keyCode) {
               case 37:
                 self.options.keyEvents.left(self);
-              break;
+                break;
 
               case 39:
                 self.options.keyEvents.right(self);
-              break;
+                break;
             }
           });
 
-          self.manageEvents.list.keyup.push({"element": document, "handler": handler});
+          self.manageEvents.list.keyup.push({
+            element: document,
+            handler: handler,
+          });
         },
 
         /**
          * Throttle the window resize event so it only occurs every x amount of
          * milliseconds, as defined by the resizeThreshold global variable.
          */
-        resizeThrottle: function() {
-
+        resizeThrottle: function () {
           // Events to be executed when the throttled window resize occurs
           function throttledEvents() {
-
             // Use a delay to give the browser a chance to repaint before
             // getting transform properties
-            setTimeout(function() {
+            setTimeout(function () {
               self.canvas.getTransformProperties();
 
               /**
@@ -3387,38 +3652,43 @@ function defineSequence(imagesLoaded, Hammer) {
            * 100ms. This is so not too many events occur during a resize. The
            * threshold can be changed using the resizeThreshold global variable.
            */
-          var throttleTimer,
-              handler;
+          var throttleTimer, handler;
 
-          handler = addEvent(window, "resize", function(e) {
-
+          handler = addEvent(window, "resize", function (e) {
             clearTimeout(throttleTimer);
             throttleTimer = setTimeout(throttledEvents, resizeThreshold);
           });
 
-          self.manageEvents.list.resize.push({"element": window, "handler": handler});
+          self.manageEvents.list.resize.push({
+            element: window,
+            handler: handler,
+          });
         },
 
         /**
          * When the page loses visibility, pause autoPlay, then unpause when
          * the page gains visibility again
          */
-        pageVisibility: function() {
+        pageVisibility: function () {
+          var handler = addEvent(
+            document,
+            visibilityChange,
+            function () {
+              if (document[hidden]) {
+                self.autoPlay.pause();
+              } else {
+                self.autoPlay.unpause();
+              }
+            },
+            false
+          );
 
-          var handler = addEvent(document, visibilityChange, function() {
-
-            if (document[hidden]) {
-
-              self.autoPlay.pause();
-            } else {
-
-              self.autoPlay.unpause();
-            }
-          }, false);
-
-          self.manageEvents.list[visibilityChange].push({"element": document, "handler": handler});
-        }
-      }
+          self.manageEvents.list[visibilityChange].push({
+            element: document,
+            handler: handler,
+          });
+        },
+      },
     };
 
     /**
@@ -3426,13 +3696,8 @@ function defineSequence(imagesLoaded, Hammer) {
      *
      * @param {Object} element - The element Sequence is attached to
      */
-    self.init = function(element) {
-
-      var id,
-          prevStep,
-          prevStepId,
-          transformProperties,
-          goToFirstStep;
+    self.init = function (element) {
+      var id, prevStep, prevStepId, transformProperties, goToFirstStep;
 
       // Merge developer options with defaults
       self.options = extend(defaults, options);
@@ -3464,7 +3729,9 @@ function defineSequence(imagesLoaded, Hammer) {
       // Find out what properties the browser supports
       // and whether Sequence should go into fallback mode
       self.propertySupport = self.animation.getPropertySupport();
-      self.isFallbackMode = self.animation.requiresFallbackMode(self.propertySupport);
+      self.isFallbackMode = self.animation.requiresFallbackMode(
+        self.propertySupport
+      );
 
       // Set up the canvas and screen with the necessary CSS properties
       self.canvas.init(id);
@@ -3488,10 +3755,10 @@ function defineSequence(imagesLoaded, Hammer) {
       // Get the previous step ID
       if (self.options.autoPlayDirection === 1) {
         prevStepId = id - 1;
-        self.prevStepId = (prevStepId < 1) ? self.noOfSteps: prevStepId;
+        self.prevStepId = prevStepId < 1 ? self.noOfSteps : prevStepId;
       } else {
         prevStepId = id + 1;
-        self.prevStepId = (prevStepId > self.noOfSteps) ? 1: prevStepId;
+        self.prevStepId = prevStepId > self.noOfSteps ? 1 : prevStepId;
       }
 
       // Get the previous step and next step
@@ -3501,12 +3768,10 @@ function defineSequence(imagesLoaded, Hammer) {
       // If the browser doesn't support CSS transitions, setup the fallback
       self.animationFallback.setupCanvas(id);
 
-      goToFirstStep = function() {
-
-        self.animation.domDelay(function() {
-
+      goToFirstStep = function () {
+        self.animation.domDelay(function () {
           // Snap the previous step into position
-          self.animation.domDelay(function() {
+          self.animation.domDelay(function () {
             self.animation.resetInheritedSpeed(prevStep);
           });
 
@@ -3521,9 +3786,12 @@ function defineSequence(imagesLoaded, Hammer) {
       };
 
       // Set up preloading if required, then go to the first step
-      if (self.options.preloader !== false && document.querySelectorAll !== undefined && typeof imagesLoaded === "function") {
-
-        self.preload.init(function() {
+      if (
+        self.options.preloader !== false &&
+        document.querySelectorAll !== undefined &&
+        typeof imagesLoaded === "function"
+      ) {
+        self.preload.init(function () {
           goToFirstStep();
         });
       } else {
@@ -3536,11 +3804,8 @@ function defineSequence(imagesLoaded, Hammer) {
      *
      * @returns {Boolean}
      */
-    self.destroy = function() {
-
-      var i,
-          step,
-          lastStep;
+    self.destroy = function () {
+      var i, step, lastStep;
 
       // Stop autoPlay
       self.autoPlay.stop();
@@ -3605,8 +3870,7 @@ function defineSequence(imagesLoaded, Hammer) {
      * navigate to or false if next() is prevented because the current step is
      * the last and the cycle option is disabled
      */
-    self.next = function() {
-
+    self.next = function () {
       var nextStepId = self.currentStepId + 1;
 
       // Cycle to the first step if on the current step and cycle is enabled
@@ -3628,10 +3892,9 @@ function defineSequence(imagesLoaded, Hammer) {
      * navigate to or false if prev() is prevented because the current step is
      * the first and the cycle option is disabled
      */
-    self.prev = function() {
-
+    self.prev = function () {
       var prevStepId = self.currentStepId - 1,
-          direction;
+        direction;
 
       if (prevStepId < 1 && self.options.cycle === false) {
         return false;
@@ -3657,8 +3920,7 @@ function defineSequence(imagesLoaded, Hammer) {
      * autoPlay.start()
      * @returns {Boolean} isAutoPlaying - true if autoPlay was started, false if stopped
      */
-    self.toggleAutoPlay = function(delay) {
-
+    self.toggleAutoPlay = function (delay) {
       if (self.isAutoPlaying === false) {
         self.start(delay);
       } else {
@@ -3668,13 +3930,11 @@ function defineSequence(imagesLoaded, Hammer) {
       return self.isAutoPlaying;
     };
 
-    self.stop = function() {
-
+    self.stop = function () {
       self.autoPlay.stop();
     };
 
-    self.start = function(delay) {
-
+    self.start = function (delay) {
       self.autoPlay.start(delay);
     };
 
@@ -3689,10 +3949,17 @@ function defineSequence(imagesLoaded, Hammer) {
      * @param {Boolean} hashTagNav - If navigation is triggered by the hashTag
      * @returns {Boolean} false when goTo was disallowed true when allowed
      */
-    self.goTo = function(id, direction, ignorePhaseThreshold, hashTagNav) {
-
+    self.goTo = function (id, direction, ignorePhaseThreshold, hashTagNav) {
       // Get the direction to navigate if one wasn't specified
-      direction = self.animation.getDirection(id, direction, self.currentStepId, self.noOfSteps, self.isFallbackMode, self.options.reverseWhenNavigatingBackwards, self.options.cycle);
+      direction = self.animation.getDirection(
+        id,
+        direction,
+        self.currentStepId,
+        self.noOfSteps,
+        self.isFallbackMode,
+        self.options.reverseWhenNavigatingBackwards,
+        self.options.cycle
+      );
 
       /**
        * Don't go to a step if:
@@ -3710,12 +3977,26 @@ function defineSequence(imagesLoaded, Hammer) {
        * - preventReverseSkipping is enabled and the user is trying to navigate
        *   in a different direction to the one already active
        */
-      if (id === undefined || id < 1 || id > self.noOfSteps || id === self.currentStepId || (self.options.navigationSkip === false && self.isAnimating === true) || (self.options.navigationSkip === true && self.navigationSkipThresholdActive === true && hashTagNav === undefined) || (self.isFallbackMode === true && self.isAnimating === true && hashTagNav === undefined) || (self.options.preventReverseSkipping === true && self.direction !== direction && self.isAnimating === true)) {
+      if (
+        id === undefined ||
+        id < 1 ||
+        id > self.noOfSteps ||
+        id === self.currentStepId ||
+        (self.options.navigationSkip === false && self.isAnimating === true) ||
+        (self.options.navigationSkip === true &&
+          self.navigationSkipThresholdActive === true &&
+          hashTagNav === undefined) ||
+        (self.isFallbackMode === true &&
+          self.isAnimating === true &&
+          hashTagNav === undefined) ||
+        (self.options.preventReverseSkipping === true &&
+          self.direction !== direction &&
+          self.isAnimating === true)
+      ) {
         return false;
       }
 
-      var currentStepElement,
-          nextStepElement;
+      var currentStepElement, nextStepElement;
 
       // Clear the previous autoPlayTimer
       clearTimeout(self.autoPlayTimer);
@@ -3743,13 +4024,15 @@ function defineSequence(imagesLoaded, Hammer) {
       self.animation.changeStep(id);
 
       if (self.isFallbackMode === false) {
-
         // Reset the next step's elements durations to 0ms so it can be snapped
         // into place
         self.animation.resetInheritedSpeed(id);
 
-        if (self.firstRun === false || (self.firstRun === true && self.options.startingStepAnimatesIn === true)) {
-
+        if (
+          self.firstRun === false ||
+          (self.firstRun === true &&
+            self.options.startingStepAnimatesIn === true)
+        ) {
           // Callback
           self.animationStarted(id, self);
         }
@@ -3763,17 +4046,35 @@ function defineSequence(imagesLoaded, Hammer) {
 
         // Are we moving the active phases forward or in reverse?
         if (direction === 1) {
-
-          self.animation.forward(id, currentStepElement, nextStepElement, ignorePhaseThreshold, hashTagNav);
+          self.animation.forward(
+            id,
+            currentStepElement,
+            nextStepElement,
+            ignorePhaseThreshold,
+            hashTagNav
+          );
         } else {
-          self.animation.reverse(id, currentStepElement, nextStepElement, ignorePhaseThreshold, hashTagNav);
+          self.animation.reverse(
+            id,
+            currentStepElement,
+            nextStepElement,
+            ignorePhaseThreshold,
+            hashTagNav
+          );
         }
       }
 
       // Use fallback animation
       else {
-
-        self.animationFallback.goTo(id, self.currentStepId, currentStepElement, id, nextStepElement, direction, hashTagNav);
+        self.animationFallback.goTo(
+          id,
+          self.currentStepId,
+          currentStepElement,
+          id,
+          nextStepElement,
+          direction,
+          hashTagNav
+        );
       }
 
       return true;
@@ -3784,16 +4085,14 @@ function defineSequence(imagesLoaded, Hammer) {
     /**
      * Callback executed when autoPlay is started
      */
-    self.started = function(self) {
-
+    self.started = function (self) {
       // console.log("auto play started");
     };
 
     /**
      * Callback executed when autoPlay is stopped
      */
-    self.stopped = function(self) {
-
+    self.stopped = function (self) {
       // console.log("auto play stopped");
     };
 
@@ -3803,8 +4102,7 @@ function defineSequence(imagesLoaded, Hammer) {
      * @param {Number} id - The ID of the step that was started
      * @param {Object} self - Properties and methods available to this instance
      */
-    self.animationStarted = function(id, self) {
-
+    self.animationStarted = function (id, self) {
       // console.log("Animation started", id);
     };
 
@@ -3814,8 +4112,7 @@ function defineSequence(imagesLoaded, Hammer) {
      * @param {Number} id - The ID of the step that finished
      * @param {Object} self - Properties and methods available to this instance
      */
-    self.animationEnded = function(id, self) {
-
+    self.animationEnded = function (id, self) {
       // console.log("Animation ended", id);
     };
 
@@ -3824,8 +4121,7 @@ function defineSequence(imagesLoaded, Hammer) {
      *
      * @param {Object} self - Properties and methods available to this instance
      */
-    self.currentPhaseStarted = function(id, self) {
-
+    self.currentPhaseStarted = function (id, self) {
       // console.log("Current phase started", id);
     };
 
@@ -3834,8 +4130,7 @@ function defineSequence(imagesLoaded, Hammer) {
      *
      * @param {Object} self - Properties and methods available to this instance
      */
-    self.currentPhaseEnded = function(id, self) {
-
+    self.currentPhaseEnded = function (id, self) {
       // console.log("Current phase ended", id);
     };
 
@@ -3844,8 +4139,7 @@ function defineSequence(imagesLoaded, Hammer) {
      *
      * @param {Object} self - Properties and methods available to this instance
      */
-    self.nextPhaseStarted = function(id, self) {
-
+    self.nextPhaseStarted = function (id, self) {
       // console.log("Next phase started", id);
     };
 
@@ -3854,8 +4148,7 @@ function defineSequence(imagesLoaded, Hammer) {
      *
      * @param {Object} self - Properties and methods available to this instance
      */
-    self.nextPhaseEnded = function(id, self) {
-
+    self.nextPhaseEnded = function (id, self) {
       // console.log("Next phase ended", id);
     };
 
@@ -3864,18 +4157,14 @@ function defineSequence(imagesLoaded, Hammer) {
      *
      * @param {Object} self - Properties and methods available to this instance
      */
-    self.throttledResize = function(self) {
-
-
-    };
+    self.throttledResize = function (self) {};
 
     /**
      * Callback executed when preloading has finished
      *
      * @param {Object} self - Properties and methods available to this instance
      */
-    self.preloaded = function(self) {
-
+    self.preloaded = function (self) {
       // console.log("preloaded");
     };
 
@@ -3888,8 +4177,7 @@ function defineSequence(imagesLoaded, Hammer) {
      * @param {Number} length - The total number of images that are being preloaded
      * @param {Object} self - Properties and methods available to this instance
      */
-    self.preloadProgress = function(result, src, progress, length, self) {
-
+    self.preloadProgress = function (result, src, progress, length, self) {
       // console.log(progress, length);
     };
 
@@ -3899,8 +4187,7 @@ function defineSequence(imagesLoaded, Hammer) {
      *
      * @param {Object} self - Properties and methods available to this instance
      */
-    self.ready = function(self) {
-
+    self.ready = function (self) {
       // console.log("Ready");
     };
 
@@ -3909,23 +4196,21 @@ function defineSequence(imagesLoaded, Hammer) {
      *
      * @param {Object} self - Properties and methods available to this instance
      */
-    self.destroyed = function(self) {
-
+    self.destroyed = function (self) {
       // console.log("Destroyed");
     };
 
     /**
-    * Make some of Sequence's helper functions public
-    *
-    * addClass() / removeClass() etc can be useful for custom theme code
-    */
+     * Make some of Sequence's helper functions public
+     *
+     * addClass() / removeClass() etc can be useful for custom theme code
+     */
     self.utils = {
       addClass: addClass,
       removeClass: removeClass,
       addEvent: addEvent,
-      removeEvent: removeEvent
+      removeEvent: removeEvent,
     };
-
 
     /* --- INIT --- */
     self.init(element);
@@ -3934,19 +4219,17 @@ function defineSequence(imagesLoaded, Hammer) {
     instances.push(self);
 
     return self;
-  });
+  };
 
   return Sequence;
 }
 
 if (typeof define === "function" && define.amd) {
-
   define(["imagesLoaded", "Hammer"], defineSequence);
 } else {
-
   /* Make dependencies optional */
-  Hammer = (typeof Hammer !== "function") ? null: Hammer;
-  imagesLoaded = (typeof imagesLoaded !== "function") ? null: imagesLoaded;
+  Hammer = typeof Hammer !== "function" ? null : Hammer;
+  imagesLoaded = typeof imagesLoaded !== "function" ? null : imagesLoaded;
 
   var sequence = defineSequence(imagesLoaded, Hammer);
 }
