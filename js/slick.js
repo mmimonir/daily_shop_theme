@@ -47,6 +47,7 @@
         nextArrow:
           '<button type="button" data-role="none" class="slick-next" aria-label="Next" tabindex="0" role="button">Next</button>',
         autoplay: true,
+        // autoplay: false,
         autoplaySpeed: 3000,
         centerMode: false,
         centerPadding: "50px",
@@ -75,6 +76,7 @@
         responsive: null,
         rows: 1,
         rtl: false,
+        // ltr: true,
         slide: "",
         slidesPerRow: 1,
         slidesToShow: 1,
