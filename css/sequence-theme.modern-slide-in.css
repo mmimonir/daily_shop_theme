@@ -300,7 +300,7 @@ html,
     /* Move the background radial to the left */
     background-position: 50% 100%;
   }
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1919px) {
   .seq {
     /* Make the container 16:9 but no bigger than 90% of the screen height */
     position: relative;
