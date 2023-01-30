@@ -123,7 +123,7 @@ html,
   /* Styles for next/previous buttons and pagination */
   position: absolute;
   z-index: 999;
-  top: 42%;
+  top: 47%;
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
@@ -287,59 +287,65 @@ html,
   transform: translate3d(0, 0, 0);
 }
 
-@media only screen and (min-width: 640px) and (max-width: 1023px) {
-  .seq {
-    /* Make the container 16:9 but no bigger than 90% of the screen height */
+@media only screen and (min-width: 1367px) and (max-width: 1919px) {
+  .seq {    
     position: relative;
-    height: auto;
-    /*height: 100%;*/
-    /* height: 600px; */
-    /*max-height: 90vh;*/
+    height: auto;    
     max-height: 100%;
-    min-height: 345px;
-    /* Move the background radial to the left */
+    min-height: 577px;    
     background-position: 50% 100%;
   }
 }
-@media only screen and (min-width: 300px) and (max-width: 639px) {
-  .seq {
-    /* Make the container 16:9 but no bigger than 90% of the screen height */
+@media only screen and (min-width: 300px) and (max-width: 730px) {
+  .seq {    
     position: relative;
-    height: auto;
-    /*height: 100%;*/
-    height: 200px;
-    /*max-height: 90vh;*/
-    max-height: 100%;
-    /* min-height: 360px; */
-    /* Move the background radial to the left */
+    height: auto;    
+    height: 200px;    
+    max-height: 100%;    
     background-position: 50% 100%;
   }
 }
-@media only screen and (min-width: 1024px) and (max-width: 1919px) {
-  .seq {
-    /* Make the container 16:9 but no bigger than 90% of the screen height */
+@media only screen and (min-width: 835px) and (max-width: 1366px) {
+  .seq {    
     position: relative;
-    height: auto;
-    /*height: 100%;*/
-    height: 600px;
-    /*max-height: 90vh;*/
-    max-height: 100%;
-    min-height: 360px;
-    /* Move the background radial to the left */
+    height: auto;    
+    max-height: 100%;    
+    min-height: 492px;    
     background-position: 50% 100%;
   }
+  #aa-slider .aa-slider-area .seq-title .aa-shop-now-btn {
+    margin-top: 25px;
+  }
 }
+@media only screen and (min-width: 731px) and (max-width: 834px) {
+  .seq {    
+    position: relative;
+    height: auto;    
+    max-height: 100%;    
+    min-height: 292px;    
+    background-position: 50% 100%;
+  }
+  #aa-slider .aa-slider-area .seq-title .aa-shop-now-btn {
+    margin-top: 25px;
+  }
+}
+ /* @media only screen and (min-width: 731px) and (max-width: 1011px) {
+  .seq {   
+    position: relative;
+    height: auto;   
+    max-height: 100%;   
+    min-height: 362px;    
+    background-position: 50% 100%;
+  }
+  
+}  */
 @media only screen and (min-width: 1920px){
-  .seq {
-    /* Make the container 16:9 but no bigger than 90% of the screen height */
+  .seq {    
     position: relative;
-    height: auto;
-    /*height: 100%;*/
-    height: 700px;
-    /*max-height: 90vh;*/
+    height: auto;    
+    height: 700px;    
     max-height: 100%;
-    min-height: 360px;
-    /* Move the background radial to the left */
+    min-height: 360px;    
     background-position: 50% 100%;
   }
 }

@@ -36,6 +36,17 @@
 */
 
 /* BASE - Base tyles, Variables, Mixins, etc. */
+.bp-btn {
+  background-color: #ec008b;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+}
+.bp-btn-parent {
+  position: relative;
+  text-align: center;
+  top: 46%;
+}
 img {
   width: 100% important;
   height: auto important;
@@ -989,7 +1000,7 @@ img {
   letter-spacing: 0.5px;
 }
 #aa-slider .aa-slider-area .seq-title .aa-shop-now-btn {
-  margin-top: 25px;
+  /* margin-top: 25px; */
 }
 #aa-slider .aa-slider-area .seq .seq-next {
   -webkit-transition: all 0.5s;
