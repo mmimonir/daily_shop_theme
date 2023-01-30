@@ -89,6 +89,8 @@ h2 {
 
 img {
   border: none;
+  width: 100%;
+  height: auto;
 }
 
 .aa-primary-btn {
@@ -1045,7 +1047,7 @@ img {
 } */
 #aa-promo .aa-promo-area .aa-promo-left {
   display: inline;
-  float: left;
+  /* float: left; */
   width: 390px;
   height: auto;
   overflow: hidden;
@@ -1081,6 +1083,7 @@ img {
   -ms-transform: translateZ(0);
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
+  /* padding: 20px; */
 }
 #aa-promo .aa-promo-area .aa-promo-banner:before {
   content: "";
