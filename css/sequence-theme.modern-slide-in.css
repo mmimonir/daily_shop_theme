@@ -304,6 +304,12 @@ html,
     max-height: 100%;    
     background-position: 50% 100%;
   }
+  #aa-header .aa-header-top .aa-header-top-right {
+    float: none;    
+    display: flex;
+    justify-content: center;    
+}
+
 }
 @media only screen and (min-width: 835px) and (max-width: 1366px) {
   .seq {    

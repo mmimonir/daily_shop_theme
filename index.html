@@ -31,6 +31,29 @@
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css" />
+  <style>
+    @media only screen and (min-width: 300px) and (max-width: 730px) {
+      #aa-header .aa-header-top .aa-header-top-right {
+        float: none;
+        display: flex;
+        justify-content: center;
+      }
+
+      #aa-header .aa-header-bottom .aa-header-bottom-area {
+        float: none;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+    }
+
+    .slider-content {
+      padding: 8px;
+      background-color: #333333;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
 
 <body>
@@ -775,11 +798,13 @@
             <ul class="aa-testimonial-slider">
               <!-- single slide -->
               <li>
-                <div class="aa-testimonial-single">
+                <div class="aa-testimonial-single" id="aa-testimonial-single">
                   <img class="" src="img/bp/motorcycle/1140-400.jpg" alt="testimonial img" />
-                  <div class="aa-testimonial-info" style="padding: 25px;">
-                    <h3 class="fw-bold">Bajaj Pulsar 160NS ABS</h3>
-                    <span class="fw-bold f-24">2,10,000 BDT</span>
+                  <div class="aa-testimonial-info" style="padding: 25px">
+                    <div class="slider-content">
+                      <h3 class="fw-bold">Bajaj Pulsar 160NS ABS</h3>
+                      <span class="fw-bold f-24">2,10,000 BDT</span>
+                    </div>
                     <div class="row">
                       <div class="col-md-4">
                         <div class="slider-content">
