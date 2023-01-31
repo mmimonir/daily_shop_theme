@@ -49,6 +49,7 @@
   letter-spacing: 5px;
   text-transform: uppercase;
   text-align: left;
+  margin: 0;
 }
 .bp-btn-parent {
   position: relative;
