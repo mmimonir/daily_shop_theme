@@ -33,10 +33,17 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css" />
   <style>
     @media only screen and (min-width: 300px) and (max-width: 730px) {
-      #aa-header .aa-header-top .aa-header-top-right {
+
+      /* #aa-header .aa-header-top .aa-header-top-right {
         float: none;
         display: flex;
         justify-content: center;
+      } */
+      .bp-header-content {
+        display: flex;
+        /* justify-content: space-between; */
+        flex-direction: column;
+        align-items: center;
       }
 
       #aa-header .aa-header-bottom .aa-header-bottom-area {
@@ -75,12 +82,11 @@
     <div class="aa-header-top">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div class="aa-header-top-area">
-              <!-- start header top left -->
+          <div class="bp-header-content">
+            <div class="col-md-6">
               <div class="aa-header-top-left">
                 <!-- start cellphone -->
-                <div class="cellphone hidden-xs">
+                <div class="cellphone">
                   <p>
                     <span class="fa fa-phone"></span>01813-551621,
                     01974-353555
@@ -89,7 +95,9 @@
                 <!-- / cellphone -->
               </div>
               <!-- / header top left -->
-              <div class="aa-header-top-right">
+            </div>
+            <div class="col-md-6">
+              <div class="aa-header-top-right text-right">
                 <ul class="aa-head-top-nav-right">
                   <li>
                     <a href="account.html"><i class="fa fa-facebook" style="color: #3b5998"></i></a>
