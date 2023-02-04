@@ -59,7 +59,7 @@
             "</button>"
           );
         },
-        dots: false,
+        dots: true,
         dotsClass: "slick-dots",
         draggable: true,
         easing: "linear",
