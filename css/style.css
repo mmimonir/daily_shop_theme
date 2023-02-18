@@ -4890,7 +4890,8 @@ img {
   }
 
   #aa-latest-blog .aa-latest-blog-area .aa-latest-blog-single .aa-blog-img {
-    height: 400px;
+    /* height: 400px; */
+    height: 100%;
   }
 
   #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget {
@@ -5343,7 +5344,8 @@ img {
   }
 
   #aa-latest-blog .aa-latest-blog-area .aa-latest-blog-single .aa-blog-img {
-    height: 250px;
+    /* height: 250px; */
+    height: 100%;
   }
 
   #wpf-loader-two .wpf-loader-two-inner {
