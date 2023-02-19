@@ -222,6 +222,9 @@ jQuery(function ($) {
     speed: 300,
     slidesToShow: 1,
     adaptiveHeight: true,
+    slidesToScroll: 1,
+    rtl: false,
+    autoplay: true,
   });
 
   /* ----------------------------------------------------------- */
