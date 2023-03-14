@@ -1,0 +1,11 @@
+Finished Works
+    1. Home Page.    
+    2. Contact Page.
+
+Pending Works.
+    1. Admin Dashboard.
+    2. Single Product Page with Gallery.
+    3. All Product Page with Pagination.
+    4. Single Blog Post Page.
+    5. All Blog Post Page with Pagination.
+    6. 404 Page.
