@@ -9,3 +9,5 @@ Pending Works.
     4. Single Blog Post Page.
     5. All Blog Post Page with Pagination.
     6. 404 Page.
+    7. Search Page.
+    
