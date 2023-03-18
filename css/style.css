@@ -2484,7 +2484,7 @@ img {
   .aa-product-catg
   li {
   margin: 0 0 20px 30px;
-  width: 29.916%;
+  /* width: 29.916%; */
 }
 #aa-product-category
   .aa-product-catg-content
@@ -2558,7 +2558,7 @@ img {
   .aa-product-catg-content
   .aa-product-catg-pagination
   .pagination {
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 0;
 }
 #aa-product-category
@@ -2603,9 +2603,10 @@ img {
   .pagination
   li
   span {
-  border: none;
-  color: #888;
-  margin-left: 0px;
+  /* border: none; */
+  /* color: #888; */
+  margin-left: 5px;
+  border-color: #EC008B;
 }
 #aa-product-category
   .aa-product-catg-content
@@ -2619,7 +2620,9 @@ img {
   .pagination
   li
   span:hover {
-  background-color: #fff;
+  background-color: #EC008B;
+  color:white;
+  
 }
 #aa-product-category
   .aa-product-catg-content
