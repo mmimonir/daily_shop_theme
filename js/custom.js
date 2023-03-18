@@ -226,6 +226,18 @@ jQuery(function ($) {
     rtl: false,
     autoplay: true,
   });
+  // In Product Details page
+  jQuery(".aa-testimonial-slider-custom").slick({
+    dots: true,
+    infinite: true,
+    arrows: true,
+    speed: 300,
+    slidesToShow: 1,
+    adaptiveHeight: true,
+    slidesToScroll: 1,
+    rtl: false,
+    // autoplay: true,
+  });
 
   /* ----------------------------------------------------------- */
   /*  8. CLIENT BRAND SLIDER (SLICK SLIDER)
