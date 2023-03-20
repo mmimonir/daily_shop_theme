@@ -2019,6 +2019,7 @@ img {
   margin: 20px auto 0;
   position: relative;
   width: 450px;
+  /* width: 100%; */
 }
 #aa-subscribe .aa-subscribe-area .aa-subscribe-form input[type="email"] {
   border: 1px solid #ccc;
@@ -4903,6 +4904,11 @@ img {
 
   #aa-blog-archive .aa-blog-archive-area .aa-blog-sidebar {
     margin-top: 30px;
+  }
+  #aa-subscribe .aa-subscribe-area .aa-subscribe-form {
+    margin: 20px auto 0;
+    position: relative;   
+    width: 100%;
   }
 }
 @media (max-width: 767px) {
