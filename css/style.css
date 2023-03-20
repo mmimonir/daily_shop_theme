@@ -4400,6 +4400,13 @@ img {
   text-align: center;
   width: 100%;
 }
+.about_us {
+  background-color: #fff;
+  display: inline;
+  float: left;
+  padding: 50px 100px;  
+  width: 100%;
+}
 #aa-contact .aa-contact-area .aa-contact-top h2 {
   color: #555;
   padding-bottom: 0px;
@@ -5619,4 +5626,10 @@ img {
   #aa-header .aa-header-top .aa-header-top-right .aa-head-top-nav-right li a {
     padding: 5px 2px;
   }
+}
+/* Bp Custom CSS */
+.bp-ul-style {
+  padding: 0px 53px;
+  margin: 0;
+  list-style: square;
 }
