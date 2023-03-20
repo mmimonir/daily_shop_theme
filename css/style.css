@@ -2548,6 +2548,12 @@ img {
   .aa-product-hvr-content {
   width: 35%;
 }
+#aa-product-catg-pagination-custom{    
+  display: inline;
+  float: left;
+  text-align: center;
+  width: 100%;
+}
 #aa-product-category .aa-product-catg-content .aa-product-catg-pagination {
   display: inline;
   float: left;
@@ -2608,6 +2614,17 @@ img {
   margin-left: 5px;
   border-color: #EC008B;
 }
+#aa-product-catg-pagination-custom
+  .pagination
+  li
+  a,
+  #aa-product-catg-pagination-custom  
+  .pagination
+  li
+  span {  
+  margin-left: 5px;
+  border-color: #EC008B;
+}
 #aa-product-category
   .aa-product-catg-content
   .aa-product-catg-pagination
@@ -2633,6 +2650,29 @@ img {
 #aa-product-category
   .aa-product-catg-content
   .aa-product-catg-pagination
+  .pagination
+  li
+  span:focus {
+  color: #fff;
+}
+
+#aa-product-catg-pagination-custom  
+  .pagination
+  li
+  a:hover,
+#aa-product-catg-pagination-custom  
+  .pagination
+  li
+  span:hover {
+  background-color: #EC008B;
+  color:white;
+  
+}
+#aa-product-catg-pagination-custom  
+  .pagination
+  li
+  a:focus,
+#aa-product-catg-pagination-custom  
   .pagination
   li
   span:focus {
@@ -3604,12 +3644,13 @@ img {
   .aa-blog-content-single
   h4
   a {
-  color: #5555;
+  color: #EC008B;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -ms-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
+  font-weight: bold;
 }
 #aa-blog-archive
   .aa-blog-archive-area
@@ -3643,7 +3684,7 @@ img {
   .aa-blog-img
   img {
   max-width: 100%;
-  opacity: 0.8;
+  /* opacity: 0.8; */
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -ms-transition: all 0.5s;
